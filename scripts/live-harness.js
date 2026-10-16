@@ -80,15 +80,15 @@ function createHarness(name, { port = DEFAULT_PORT } = {}) {
   const env = { ...process.env, HOME, OPENPLEAD_HIDDEN: '1' };
   delete env.ELECTRON_RUN_AS_NODE; // inherited from an editor, it would turn Electron into plain Node
   const userData = `--user-data-dir=${path.join(HOME, 'userdata')}`;
+  // CI runners lack user namespaces for Chromium's sandbox
+  const sandbox = process.platform === 'linux' && process.env.CI ? ['--no-sandbox'] : [];
   let child = null;
   let browser = null;
 
   // Starts the pet on a free devtools port, waits for its health route and connects to its pages.
   async function start() {
     const devtools = await freePort();
-    const args = ['.', userData, `--remote-debugging-port=${devtools}`];
-    if (process.platform === 'linux' && process.env.CI) args.push('--no-sandbox'); // CI runners lack user namespaces for Chromium's sandbox
-    child = spawn(ELECTRON, args, {
+    child = spawn(ELECTRON, ['.', userData, `--remote-debugging-port=${devtools}`, ...sandbox], {
       cwd: REPO,
       env,
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -110,7 +110,7 @@ function createHarness(name, { port = DEFAULT_PORT } = {}) {
   }
   // A second copy with the same user-data dir: the running pet answers by opening its Settings window (hidden).
   function openSettings() {
-    const second = spawn(ELECTRON, ['.', userData], { cwd: REPO, env, stdio: 'ignore', detached: true });
+    const second = spawn(ELECTRON, ['.', userData, ...sandbox], { cwd: REPO, env, stdio: 'ignore', detached: true });
     second.unref();
   }
   // The first page whose URL matches, once it exists.
