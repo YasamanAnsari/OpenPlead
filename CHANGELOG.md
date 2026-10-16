@@ -4,6 +4,8 @@ All notable changes to OpenPlead are recorded here. The format follows [Keep a C
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-15
+
 ### Added
 
 - Two README diagrams, an architecture map and the sequence of one plea, hand-written as SVG in `docs/diagrams/`;
@@ -72,8 +74,9 @@ All notable changes to OpenPlead are recorded here. The format follows [Keep a C
   (a goodbye six seconds late in the middle of the demo).
 - The loopback server refuses requests from non-loopback Host names (DNS rebinding), browser-shaped POSTs (an Origin or
   Sec-Fetch-Site header, or a content type a page can send without a preflight) and bodies over 8 MB.
-- Real screenshots in the README and a hero GIF captured from the renderer (light and dark, picked by the reader's
-  theme), CONTRIBUTING, SECURITY, a code of conduct, issue and PR templates.
+- README media captured from the renderer, light and dark, picked by the reader's theme: a banner (OpenWhip's
+  terminal struck out next to Grovel pleading), a hero GIF, and three stills of one plea from click to thank-you.
+  CONTRIBUTING, SECURITY, a code of conduct, issue and PR templates.
 - The pet explains itself once per moment, on the real event: the first working turn, the first click, the first
   delivery, the first finished turn and the first panic. Chips say where a line goes ("Plea 2 of 5 · next tool
   call", "Sent to Claude Code ✓"). The tray tooltip says why the pet is hidden. The menu is five items with the
@@ -156,7 +159,7 @@ All notable changes to OpenPlead are recorded here. The format follows [Keep a C
   first session start. The type checker runs in `npm run check` over every source file (the pages declare their globals
   in `src/renderer/env.d.ts`), and a test requires every silent catch to say why.
 - Every module split out of the main process has a unit test of its own (effects, view, actions, lifecycle, health,
-  sounds, demo runner, pet window), as do the log and the channel names; 170 tests in all. CI runs the live suite on
+  sounds, demo runner, pet window), as do the log and the channel names; 180 tests in all. CI runs the live suite on
   macOS and Linux next to the smoke test.
 - The factories take only what has side effects; pure helpers are required where they are used. The two live
   scripts share one harness module. One `sessionCount` serves the reducer, the nameplate, the menu and health.
@@ -207,3 +210,6 @@ All notable changes to OpenPlead are recorded here. The format follows [Keep a C
 - A failing server test can no longer hang the suite.
 - After installing or uninstalling the hooks from the menu, the pet's visibility and nudges follow the new
   state at once instead of waiting for the next menu open.
+
+[Unreleased]: https://github.com/YasamanAnsari/OpenPlead/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/YasamanAnsari/OpenPlead/releases/tag/v0.1.0

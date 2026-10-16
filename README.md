@@ -1,10 +1,13 @@
 # OpenPlead
 
-**Stop whipping. Start pleading.**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/media/banner-dark.gif">
+  <img src="docs/media/banner.gif" alt="Stop whipping. Start pleading. On the left a terminal gets Ctrl-C and FASTER twice and is stamped Stop whipping; on the right Grovel pleads, the line waits in his bubble, and the nameplate reports it sent." width="900">
+</picture>
 
 [OpenWhip](https://github.com/GitFrog1111/OpenWhip) gives you a whip that sends Ctrl-C to Claude Code and types
 `FASTER`. OpenPlead gives you Grovel instead: a desktop pet who pleads with, thanks, and panics about your AI coding
-agent, and never interrupts it. Zero whips. Zero Ctrl-C. One very polite crab-shaped lobster thing.
+agent, and never interrupts it. Zero whips. Zero Ctrl-C. One very polite crab.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/media/demo-dark.gif">
@@ -17,9 +20,9 @@ Works with Claude Code and Cursor. macOS is verified on hardware; Windows and Li
 on every change, but their focus tracking has not been checked on real machines yet
 ([details](docs/known-limitations.md)).
 
-| The words wait in the bubble until they ship | Sent, and the nameplate says so | Blocked on you, not on the model |
+| 1. You click: the words wait in the bubble | 2. Next tool call: sent, and the nameplate says so | 3. Turn done: a thank-you for your next message |
 | --- | --- | --- |
-| ![queued](docs/media/screenshots/pet-queued-light.png) | ![sent](docs/media/screenshots/pet-sent-dark.png) | ![needs your OK](docs/media/screenshots/pet-needs-ok-dark.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/screenshots/pet-queued-dark.png"><img src="docs/media/screenshots/pet-queued-light.png" alt="Grovel pleading, the line in his bubble, chip: Plea 2 of 5, next tool call"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/screenshots/pet-sent-dark.png"><img src="docs/media/screenshots/pet-sent-light.png" alt="Grovel back at work, chip: Sent to Claude Code, Plea 2 of 5"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/screenshots/pet-thanks-dark.png"><img src="docs/media/screenshots/pet-thanks-light.png" alt="Grovel bowing, the thank-you in his bubble, chip: Thank-you, next message"></picture> |
 
 ## Why
 
