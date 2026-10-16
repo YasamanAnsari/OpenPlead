@@ -86,7 +86,9 @@ function createHarness(name, { port = DEFAULT_PORT } = {}) {
   // Starts the pet on a free devtools port, waits for its health route and connects to its pages.
   async function start() {
     const devtools = await freePort();
-    child = spawn(ELECTRON, ['.', userData, `--remote-debugging-port=${devtools}`], {
+    const args = ['.', userData, `--remote-debugging-port=${devtools}`];
+    if (process.platform === 'linux' && process.env.CI) args.push('--no-sandbox'); // CI runners lack user namespaces for Chromium's sandbox
+    child = spawn(ELECTRON, args, {
       cwd: REPO,
       env,
       stdio: ['ignore', 'pipe', 'pipe'],

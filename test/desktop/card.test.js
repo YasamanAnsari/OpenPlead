@@ -3,6 +3,7 @@
 // The reply card: the pose that said the line, and the PNG that is saved.
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const path = require('node:path');
 const { spriteFor } = require('../../src/desktop/card');
 
 test('the card shows the pose that said the line', () => {
@@ -27,7 +28,7 @@ test('a saved card is named by the local reply time and holds the rendered bytes
     },
     writeFile: (f, png) => (written = { f, png }),
   });
-  assert.equal(file, '/desk/OpenPlead reply 2026-10-15 09.05.00.png');
+  assert.equal(file, path.join('/desk', 'OpenPlead reply 2026-10-15 09.05.00.png'));
   assert.equal(written.f, file);
   assert.equal(written.png.toString(), 'png');
   assert.equal(rendered.kind, 'thanks');
@@ -36,7 +37,6 @@ test('a saved card is named by the local reply time and holds the rendered bytes
 
 test('two cards saved in the same second never overwrite each other or any file already there', async () => {
   const fs = require('node:fs');
-  const path = require('node:path');
   const { tmpDir } = require('../helpers/fs');
   const dir = tmpDir('cards');
   const entry = { at: new Date(2026, 9, 15, 9, 5, 7).getTime(), plea: 'p', reply: 'r', kind: 'plea', level: 1 };

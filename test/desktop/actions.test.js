@@ -193,10 +193,11 @@ test('the menu is built from the live state and the settings view from health an
   };
   assert.ok(find(menu.template, /^Plead with/), 'the real template, built from the live state');
   assert.equal(find(menu.template, /^No agent open$/).enabled, false, 'the status line: no session in this state');
-  assert.equal(
-    find(menu.template, /^Go to Terminal$/).enabled,
-    process.platform === 'darwin',
-    'the agent app from agentApp()',
+  const goTo = find(menu.template, /^Go to /);
+  assert.deepEqual(
+    [goTo.label, goTo.enabled],
+    process.platform === 'darwin' ? ['Go to Terminal', true] : ["Go to the agent's app", false],
+    'the agent app from agentApp(); only macOS can bring it forward',
   );
   find(menu.template, /^See all replies…$/i).click();
   assert.deepEqual(
