@@ -7,6 +7,10 @@
 const path = require('node:path');
 const fs = require('node:fs');
 const { createHarness, sleep } = require('./live-harness');
+const { hotkeysFor } = require('../src/desktop/menu');
+
+const HOTKEY = hotkeysFor(process.platform)[2];
+const OS = { darwin: 'macOS', win32: 'Windows', linux: 'Linux' }[process.platform];
 
 const h = createHarness('settings');
 const { HOME, PORT, REPO, log, check, until, get } = h;
@@ -155,8 +159,8 @@ const defaults = JSON.parse(fs.readFileSync(path.join(REPO, 'src', 'core', 'phra
   await until(() => cfg().quietUntil === -1, 'mute until turned off saved');
   await flip('Not muted', true);
   await until(() => cfg().quietUntil === 0, 'unmuted');
-  await flip('Control Shift Space', true);
-  await until(() => cfg().hotkey === 'Control+Shift+Space', 'hotkey saved');
+  await flip(HOTKEY.replace(/\+/g, ' '), true);
+  await until(() => cfg().hotkey === HOTKEY, 'hotkey saved');
   await flip('Off', true);
   await until(() => cfg().hotkey === null, 'hotkey off');
   check(await page.$eval('#unpark', (b) => b.disabled), 'Unpark is dimmed while not parked');
@@ -248,7 +252,7 @@ const defaults = JSON.parse(fs.readFileSync(path.join(REPO, 'src', 'core', 'phra
 
   // ---- About
   await tab('about');
-  check(/^Version 0\.1\.0 on macOS$/.test(await text('#about-version')), 'About: version line');
+  check((await text('#about-version')) === `Version 0.1.0 on ${OS}`, 'About: version line');
   check(
     /^You pleaded \d+ times?\. Claude was thanked \d+ times?\. \d+ panics?\.$/.test(await text('#about-record')),
     'About: the tally as a sentence',
