@@ -4,6 +4,13 @@ All notable changes to OpenPlead are recorded here. The format follows [Keep a C
 
 ## [Unreleased]
 
+### Changed
+
+- The README is a short front page: the banner, a real reply card, the pitch, the demo, install, the plead ladder and
+  the FAQ. Everything else moved to `docs/guide.md`, and the development and media notes to CONTRIBUTING. The reply
+  card is rendered by `npm run demo` from a recorded Claude Code exchange through the app's own card page.
+- Removed an unsourced claim about OpenWhip's token cost from the FAQ.
+
 ## [0.1.0] - 2026-10-15
 
 ### Added

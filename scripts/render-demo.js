@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Renders the README media from the real pet renderer, in light and dark: the banner (a whipped terminal next to
 // Grovel pleading), the demo (the plead ladder from respect to sacrifice, the top level going out once, a panic
-// answered with a calm line, the Reaper, and the thank-you) and the three stills of one plea (queued, sent, thanked).
+// answered with a calm line, the Reaper, and the thank-you), the three stills of one plea (queued, sent, thanked) and
+// a reply card.
 // Requires ffmpeg on PATH.
 //
 //   node scripts/render-demo.js            writes docs/media/{banner,demo}[-dark].gif and the six pet stills
-//   node scripts/render-demo.js --stills   only the stills in docs/media/screenshots/ (no ffmpeg needed)
+//   node scripts/render-demo.js --stills   only the stills and docs/media/reply-card.png (no ffmpeg needed)
 
 'use strict';
 
@@ -16,6 +17,9 @@ const { execFileSync } = require('node:child_process');
 const { pathToFileURL } = require('node:url');
 const puppeteer = require('puppeteer');
 const phrases = require('../src/core/phrases.default.json');
+const CARD = require('../src/desktop/card');
+const { labelOf } = require('../src/core/tag');
+const { agentName } = require('../src/core/apps');
 
 const ROOT = path.join(__dirname, '..');
 const PET = pathToFileURL(path.join(ROOT, 'src', 'renderer', 'index.html')).href;
@@ -160,6 +164,38 @@ const BANNER_SCENES = [
 ];
 const BANNER_DURATION = 12;
 
+// The README's reply card: a real exchange from a recorded Claude Code session (Opus, October 14, 2026), drawn by the
+// app's own card page with the app's own label, pose and agent name.
+const CARD_ENTRY = {
+  agent: 'claude-code',
+  kind: 'thanks',
+  level: 0,
+  plea: line(phrases.thanks, "I'd hug you"),
+  reply: "I don't have a hug endpoint, but a file that validates on the first try is the closest thing I can return.",
+  when: 'October 14, 2026',
+};
+
+async function renderReplyCard(browser) {
+  const tab = await browser.newPage();
+  await tab.setViewport({ width: CARD.WIDTH, height: CARD.HEIGHT, deviceScaleFactor: 1 });
+  const url = new URL(pathToFileURL(path.join(ROOT, 'src', 'renderer', 'card.html')).href);
+  const query = {
+    plea: CARD_ENTRY.plea,
+    reply: CARD_ENTRY.reply,
+    agent: agentName(CARD_ENTRY.agent),
+    label: labelOf(CARD_ENTRY),
+    when: CARD_ENTRY.when,
+    sprite: `${SPRITES}/${CARD.spriteFor(CARD_ENTRY.kind, CARD_ENTRY.level)}`,
+  };
+  for (const [k, v] of Object.entries(query)) url.searchParams.set(k, v);
+  await tab.goto(url.href, { waitUntil: 'load' });
+  await new Promise((r) => setTimeout(r, 800)); // fonts and the sprite's first frame
+  const out = path.join(ROOT, 'docs', 'media', 'reply-card.png');
+  await tab.screenshot({ path: out });
+  await tab.close();
+  console.log(`wrote ${path.relative(process.cwd(), out)}`);
+}
+
 // The README's three pet stills, one plea from click to thank-you: the plain 280x280 window at 2x, no caption.
 const STILLS = [
   { name: 'pet-queued', ...plea(2, 'Your reasoning has been excellent', '') },
@@ -292,6 +328,7 @@ async function render(browser, dark, { html, width, height, scenes, duration, ou
   const browser = await puppeteer.launch({ headless: true });
   try {
     await renderStills(browser);
+    await renderReplyCard(browser);
     if (stillsOnly) return;
     const media = (name) => path.join(ROOT, 'docs', 'media', name);
     const demo = { html: page, width: WIDTH, height: HEIGHT, scenes: SCENES, duration: DURATION };
