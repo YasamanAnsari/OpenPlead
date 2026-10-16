@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Thank: arms come in and clasp (0-0.3 s), a deep bow with happy '^' eyes and a blush (0.3-1.9 s, motion lines on the way down), rise, pink pixel hearts float up with a sparkle, a small second nod (2.2-2.6 s), arms back out. Bow is a vertical squash about the feet. 3 s loop. Geometry from grovel-base.svg. -->
+  <style>
+    .pet { animation: bow 3s ease-in-out infinite; transform-origin: 80px 102px; }
+    .arm-l { animation: armL 3s ease-in-out infinite; } .arm-r { animation: armR 3s ease-in-out infinite; }
+    .open { animation: wOpen 3s linear infinite; } .shut { animation: wShut 3s linear infinite; } .blush { animation: wBlush 3s linear infinite; }
+    .lines { animation: wLines 3s linear infinite; }
+    .h1 { animation: heart1 3s ease-out infinite; } .h2 { animation: heart2 3s ease-out infinite; }
+    .spark { animation: wSpark 3s linear infinite; } .tw { animation: blink 0.5s steps(1, end) infinite; }
+    @keyframes bow { 0.000% { transform: scaleY(1) } 10.000% { transform: scaleY(1) } 23.333% { transform: scaleY(0.74) } 50.000% { transform: scaleY(0.74) } 63.333% { transform: scaleY(1) } 73.333% { transform: scaleY(1) } 80.000% { transform: scaleY(0.92) } 86.667% { transform: scaleY(1) } 100.000% { transform: scaleY(1) } }
+    @keyframes armL { 0.000% { transform: translate(0px, 0px) } 10.000% { transform: translate(48px, 12px) } 90.000% { transform: translate(48px, 12px) } 100.000% { transform: translate(0px, 0px) } }
+    @keyframes armR { 0.000% { transform: translate(0px, 0px) } 10.000% { transform: translate(-52px, 16px) } 90.000% { transform: translate(-52px, 16px) } 100.000% { transform: translate(0px, 0px) } }
+    @keyframes wOpen { 0.000% { opacity: 1 } 16.633% { opacity: 1 } 16.667% { opacity: 0 } 66.633% { opacity: 0 } 66.667% { opacity: 1 } 99.967% { opacity: 1 } 100.000% { opacity: 1 } }
+    @keyframes wShut { 0.000% { opacity: 0 } 16.633% { opacity: 0 } 16.667% { opacity: 1 } 66.633% { opacity: 1 } 66.667% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wBlush { 0.000% { opacity: 0 } 13.300% { opacity: 0 } 13.333% { opacity: 1 } 93.300% { opacity: 1 } 93.333% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wLines { 0.000% { opacity: 0 } 11.633% { opacity: 0 } 11.667% { opacity: 1 } 23.300% { opacity: 1 } 23.333% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wSpark { 0.000% { opacity: 0 } 56.633% { opacity: 0 } 56.667% { opacity: 1 } 96.633% { opacity: 1 } 96.667% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes heart1 { 0.000% { transform: translateY(6px); opacity: 0 } 53.333% { transform: translateY(6px); opacity: 0 } 58.333% { transform: translateY(0); opacity: 1 } 83.333% { transform: translateY(-10px); opacity: 0 } 100.000% { transform: translateY(-10px); opacity: 0 } }
+    @keyframes heart2 { 0.000% { transform: translateY(6px); opacity: 0 } 66.667% { transform: translateY(6px); opacity: 0 } 71.667% { transform: translateY(0); opacity: 1 } 96.667% { transform: translateY(-10px); opacity: 0 } 100.000% { transform: translateY(-10px); opacity: 0 } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="56" ry="4" fill="#000" opacity="0.15"/>
+    <g class="lines" fill="#2f2f38" shape-rendering="crispEdges"><rect x="58" y="4" width="2" height="8"/><rect x="79" y="0" width="2" height="8"/><rect x="100" y="4" width="2" height="8"/></g>
+    <g class="h1" shape-rendering="crispEdges"><g fill="#e03890"><rect x="72" y="-8" width="4" height="4"/><rect x="84" y="-8" width="4" height="4"/><rect x="68" y="-4" width="4" height="4"/><rect x="72" y="-4" width="4" height="4"/><rect x="76" y="-4" width="4" height="4"/><rect x="80" y="-4" width="4" height="4"/><rect x="84" y="-4" width="4" height="4"/><rect x="88" y="-4" width="4" height="4"/><rect x="72" y="0" width="4" height="4"/><rect x="76" y="0" width="4" height="4"/><rect x="80" y="0" width="4" height="4"/><rect x="84" y="0" width="4" height="4"/><rect x="76" y="4" width="4" height="4"/><rect x="80" y="4" width="4" height="4"/></g><g fill="#993add"><rect x="84" y="-4" width="4" height="4"/><rect x="88" y="-4" width="4" height="4"/><rect x="84" y="0" width="4" height="4"/></g><rect x="72" y="-4" width="4" height="4" fill="#FFFFFF"/></g>
+    <g class="h2" shape-rendering="crispEdges"><g fill="#e03890"><rect x="108" y="2" width="4" height="4"/><rect x="120" y="2" width="4" height="4"/><rect x="104" y="6" width="4" height="4"/><rect x="108" y="6" width="4" height="4"/><rect x="112" y="6" width="4" height="4"/><rect x="116" y="6" width="4" height="4"/><rect x="120" y="6" width="4" height="4"/><rect x="124" y="6" width="4" height="4"/><rect x="108" y="10" width="4" height="4"/><rect x="112" y="10" width="4" height="4"/><rect x="116" y="10" width="4" height="4"/><rect x="120" y="10" width="4" height="4"/><rect x="112" y="14" width="4" height="4"/><rect x="116" y="14" width="4" height="4"/></g><g fill="#993add"><rect x="120" y="6" width="4" height="4"/><rect x="124" y="6" width="4" height="4"/><rect x="120" y="10" width="4" height="4"/></g><rect x="108" y="6" width="4" height="4" fill="#FFFFFF"/></g>
+    <g class="spark" shape-rendering="crispEdges"><g class="tw"><g fill="#ffff39"><rect x="48" y="1" width="3" height="9"/><rect x="45" y="4" width="9" height="3"/></g><g fill="#ffff39"><rect x="122" y="17" width="3" height="9"/><rect x="119" y="20" width="9" height="3"/></g></g></g>
+    <g class="pet" shape-rendering="crispEdges" fill="#D97757">
+      <g><rect data-part="leg" x="42" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="63" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="86" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="107" y="76" width="11" height="26"/></g>
+      <rect data-part="body" x="32" y="16" width="96" height="60"/>
+      <g class="blush"><g fill="#F48FB1"><rect x="36" y="42" width="4" height="4"/><rect x="40" y="42" width="4" height="4"/><rect x="116" y="42" width="4" height="4"/><rect x="120" y="42" width="4" height="4"/></g></g>
+      <g class="open"><g fill="#2f2f38"><rect x="44" y="28" width="11" height="10"/><rect x="105" y="28" width="11" height="10"/></g></g>
+      <g class="shut"><g fill="#2f2f38"><rect x="47" y="28" width="5" height="5"/><rect x="44" y="33" width="4" height="5"/><rect x="51" y="33" width="4" height="5"/><rect x="108" y="28" width="5" height="5"/><rect x="105" y="33" width="4" height="5"/><rect x="112" y="33" width="4" height="5"/></g></g>
+      <g fill="#FFFFFF"><rect x="72" y="44" width="4" height="4"/><rect x="84" y="44" width="4" height="4"/><rect x="76" y="48" width="4" height="4"/><rect x="80" y="48" width="4" height="4"/></g>
+      <g class="arm-l"><rect data-part="arm" x="12" y="36" width="20" height="20" stroke="#B5603F" stroke-width="2"/></g><g class="arm-r"><rect data-part="arm" x="128" y="36" width="20" height="20" stroke="#B5603F" stroke-width="2"/></g>
+    </g>
+  </g>
+</svg>

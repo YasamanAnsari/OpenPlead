@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="130" viewBox="0 0 240 130">
+  <!--
+    Deadline: one 6 s story loop.
+      0.0-2.0 s  calm typing; the reaper drifts in from the right; hourglass sand runs
+      2.0-3.0 s  Grovel glances over, eyes go wide, sweat, typing speeds up
+      3.0-4.2 s  reaper's hand on Grovel's shoulder: "!!", shaking, frantic typing, speed lines
+      4.2-6.0 s  Enter slammed with sparks, hourglass flips, startled reaper retreats, relieved sigh, calm again
+    Canvas widened to 240 for the reaper; Grovel keeps the grovel-base.svg position (x 12-148).
+  -->
+  <style>
+    .grovel { animation: shake 6s linear infinite; }
+    .arm-l { animation: armL 6s ease-in-out infinite; }
+    .arm-r { animation: armR 6s ease-in-out infinite; }
+    .eyes-calm { animation: wCalm 6s linear infinite; }
+    .eyes-glance { animation: wGlance 6s linear infinite; }
+    .eyes-nervous { animation: wNervous 6s linear infinite; }
+    .eyes-panic { animation: wPanic 6s linear infinite; }
+    .eyes-slam { animation: wSlam 6s linear infinite; }
+    .eyes-relief { animation: wRelief 6s linear infinite; }
+    .pupil-jitter { animation: jitter 0.2s steps(1, end) infinite; }
+    .reaper { animation: reaper 6s ease-in-out infinite; }
+    .reach { animation: wReach 6s linear infinite; }
+    .pat { animation: pat 0.25s ease-in-out infinite; }
+    .puffs { animation: wPuffs 6s linear infinite; }
+    .puff { animation: puff 0.4s steps(1, end) infinite; }
+    .puff.p2 { animation-delay: -0.2s; }
+    .bang { animation: wBang 6s linear infinite; }
+    .bang-pop { animation: pop 0.4s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+    .sweat { animation: wSweat 6s linear infinite; }
+    .drop-r { animation: flyR 0.5s ease-out infinite; }
+    .drop-l { animation: flyL 0.5s ease-out -0.25s infinite; }
+    .speed { animation: wSpeed 6s linear infinite; }
+    .speed-blink { animation: blink 0.2s steps(1, end) infinite; }
+    .sparks { animation: wSparks 6s linear infinite; }
+    .spark-blink { animation: blink 0.2s steps(1, end) infinite; }
+    .sigh { animation: sigh 6s ease-out infinite; }
+    .hourglass { animation: flip 6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+    .sand-top { animation: drain 6s linear infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+    .sand-bottom { animation: fill 6s linear infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+    .stream { animation: wStream 6s linear infinite; }
+    .grain { animation: grain 0.3s linear infinite; }
+    .grain.g2 { animation-delay: -0.15s; }
+    @keyframes shake { 0.000% { transform: translateX(0px) } 40.000% { transform: translateX(0px) } 41.667% { transform: translateX(-1px) } 43.333% { transform: translateX(1px) } 45.000% { transform: translateX(-1px) } 46.667% { transform: translateX(1px) } 48.333% { transform: translateX(-1px) } 50.000% { transform: translateX(-2px) } 51.667% { transform: translateX(2px) } 53.333% { transform: translateX(-2px) } 55.000% { transform: translateX(2px) } 56.667% { transform: translateX(-2px) } 58.333% { transform: translateX(2px) } 60.000% { transform: translateX(-2px) } 61.667% { transform: translateX(2px) } 63.333% { transform: translateX(-2px) } 65.000% { transform: translateX(2px) } 66.667% { transform: translateX(-2px) } 68.333% { transform: translateX(2px) } 70.000% { transform: translateX(0px) } 100.000% { transform: translateX(0px) } }
+    @keyframes armL { 0.000% { transform: translateY(0.0px) } 4.167% { transform: translateY(3px) } 8.333% { transform: translateY(0.0px) } 12.500% { transform: translateY(3px) } 16.667% { transform: translateY(0.0px) } 20.833% { transform: translateY(3px) } 25.000% { transform: translateY(0.0px) } 29.167% { transform: translateY(3px) } 33.333% { transform: translateY(0.0px) } 37.500% { transform: translateY(3px) } 41.667% { transform: translateY(0.0px) } 45.833% { transform: translateY(3px) } 50.000% { transform: translateY(0.0px) } 51.667% { transform: translateY(4px) } 53.333% { transform: translateY(0.0px) } 55.000% { transform: translateY(4px) } 56.667% { transform: translateY(0.0px) } 58.333% { transform: translateY(4px) } 60.000% { transform: translateY(0.0px) } 61.667% { transform: translateY(4px) } 63.333% { transform: translateY(0.0px) } 65.000% { transform: translateY(4px) } 66.667% { transform: translateY(0.0px) } 68.333% { transform: translateY(4px) } 70.000% { transform: translateY(0.0px) } 71.667% { transform: translateY(-10.0px) } 73.333% { transform: translateY(5.0px) } 76.667% { transform: translateY(0.0px) } 90.000% { transform: translateY(0.0px) } 95.000% { transform: translateY(3.0px) } 100.000% { transform: translateY(0.0px) } }
+    @keyframes armR { 0.000% { transform: translateY(3px) } 4.167% { transform: translateY(0.0px) } 8.333% { transform: translateY(3px) } 12.500% { transform: translateY(0.0px) } 16.667% { transform: translateY(3px) } 20.833% { transform: translateY(0.0px) } 25.000% { transform: translateY(3px) } 29.167% { transform: translateY(0.0px) } 33.333% { transform: translateY(3px) } 37.500% { transform: translateY(0.0px) } 41.667% { transform: translateY(3px) } 45.833% { transform: translateY(0.0px) } 50.000% { transform: translateY(4px) } 51.667% { transform: translateY(0.0px) } 53.333% { transform: translateY(4px) } 55.000% { transform: translateY(0.0px) } 56.667% { transform: translateY(4px) } 58.333% { transform: translateY(0.0px) } 60.000% { transform: translateY(4px) } 61.667% { transform: translateY(0.0px) } 63.333% { transform: translateY(4px) } 65.000% { transform: translateY(0.0px) } 66.667% { transform: translateY(4px) } 68.333% { transform: translateY(0.0px) } 70.000% { transform: translateY(4px) } 71.667% { transform: translateY(-10.0px) } 73.333% { transform: translateY(5.0px) } 76.667% { transform: translateY(0.0px) } 90.000% { transform: translateY(0.0px) } 92.500% { transform: translateY(3.0px) } 96.667% { transform: translateY(0.0px) } 100.000% { transform: translateY(3.0px) } }
+    @keyframes wCalm { 0.000% { opacity: 1 } 33.317% { opacity: 1 } 33.333% { opacity: 0 } 89.983% { opacity: 0 } 90.000% { opacity: 1 } 100.000% { opacity: 1 } }
+    @keyframes wGlance { 0.000% { opacity: 0 } 33.317% { opacity: 0 } 33.333% { opacity: 1 } 39.983% { opacity: 1 } 40.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wNervous { 0.000% { opacity: 0 } 39.983% { opacity: 0 } 40.000% { opacity: 1 } 49.983% { opacity: 1 } 50.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wPanic { 0.000% { opacity: 0 } 49.983% { opacity: 0 } 50.000% { opacity: 1 } 69.983% { opacity: 1 } 70.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wSlam { 0.000% { opacity: 0 } 69.983% { opacity: 0 } 70.000% { opacity: 1 } 79.983% { opacity: 1 } 80.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wRelief { 0.000% { opacity: 0 } 79.983% { opacity: 0 } 80.000% { opacity: 1 } 89.983% { opacity: 1 } 90.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wReach { 0.000% { opacity: 0 } 56.650% { opacity: 0 } 56.667% { opacity: 1 } 73.317% { opacity: 1 } 73.333% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wPuffs { 0.000% { opacity: 0 } 9.983% { opacity: 0 } 10.000% { opacity: 1 } 49.983% { opacity: 1 } 50.000% { opacity: 0 } 76.650% { opacity: 0 } 76.667% { opacity: 1 } 89.983% { opacity: 1 } 90.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wBang { 0.000% { opacity: 0 } 49.983% { opacity: 0 } 50.000% { opacity: 1 } 73.317% { opacity: 1 } 73.333% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wSweat { 0.000% { opacity: 0 } 39.983% { opacity: 0 } 40.000% { opacity: 1 } 73.317% { opacity: 1 } 73.333% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wSpeed { 0.000% { opacity: 0 } 49.983% { opacity: 0 } 50.000% { opacity: 1 } 69.983% { opacity: 1 } 70.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wSparks { 0.000% { opacity: 0 } 71.650% { opacity: 0 } 71.667% { opacity: 1 } 81.650% { opacity: 1 } 81.667% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wStream { 0.000% { opacity: 1 } 69.983% { opacity: 1 } 70.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes reaper { 0.000% { transform: translate(270px, 0); opacity: 0 } 10.000% { transform: translate(226px, 0); opacity: 1 } 33.333% { transform: translate(204px, -2px); opacity: 1 } 50.000% { transform: translate(174px, 0); opacity: 1 } 56.667% { transform: translate(162px, -1px); opacity: 1 } 73.333% { transform: translate(162px, 0); opacity: 1 } 75.833% { transform: translate(170px, -8px); opacity: 1 } 90.000% { transform: translate(262px, -2px); opacity: 0 } 100.000% { transform: translate(270px, 0); opacity: 0 } }
+    @keyframes sigh { 0.000% { transform: translate(0, 0); opacity: 0 } 80.833% { transform: translate(0, 0); opacity: 0 } 81.667% { transform: translate(0, 0); opacity: 1 } 91.667% { transform: translate(-10px, -8px); opacity: 0 } 100.000% { transform: translate(-10px, -8px); opacity: 0 } }
+    @keyframes flip { 0.000% { transform: rotate(0deg) } 73.333% { transform: rotate(0deg) } 80.000% { transform: rotate(180deg) } 100.000% { transform: rotate(180deg) } }
+    @keyframes drain { 0.000% { transform: scaleY(1) } 70.000% { transform: scaleY(0) } 100.000% { transform: scaleY(0) } }
+    @keyframes fill { 0.000% { transform: scaleY(0) } 70.000% { transform: scaleY(1) } 100.000% { transform: scaleY(1) } }
+    @keyframes jitter { 0% { transform: translateX(0); } 50% { transform: translateX(1px); } }
+    @keyframes pat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+    @keyframes puff { 0% { opacity: 1; } 50% { opacity: 0.3; } }
+    @keyframes pop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+    @keyframes flyR { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(12px, 9px); opacity: 0; } }
+    @keyframes flyL { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(-12px, 9px); opacity: 0; } }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } }
+    @keyframes grain { 0% { transform: translateY(0); } 100% { transform: translateY(6px); } }
+  </style>
+  <g transform="translate(0 20)">
+  <ellipse cx="80" cy="104" rx="56" ry="4" fill="#000" opacity="0.15"/>
+
+  <!-- reaper (behind Grovel); its reaching hand is drawn last, in front -->
+  <g class="reaper" shape-rendering="crispEdges">
+    <ellipse cx="0" cy="104" rx="20" ry="3" fill="#000" opacity="0.15"/>
+    <g class="puffs" fill="#D0D4DA">
+      <g class="puff"><rect x="24" y="92" width="6" height="5"/><rect x="28" y="89" width="4" height="4"/></g>
+      <g class="puff p2"><rect x="32" y="96" width="5" height="4"/><rect x="26" y="99" width="4" height="3"/></g>
+    </g>
+    <rect x="18" y="22" width="3" height="82" fill="#7B5A44"/>
+    <rect x="18" y="22" width="1" height="82" fill="#A47E62"/>
+    <rect x="2" y="20" width="19" height="3" fill="#CFD8DC"/>
+    <rect x="-6" y="23" width="10" height="3" fill="#CFD8DC"/>
+    <rect x="-10" y="26" width="6" height="3" fill="#CFD8DC"/>
+    <rect x="-12" y="29" width="4" height="4" fill="#CFD8DC"/>
+    <rect x="2" y="20" width="19" height="1" fill="#FFFFFF"/>
+    <rect x="-6" y="23" width="8" height="1" fill="#FFFFFF"/>
+    <rect x="4" y="23" width="14" height="1" fill="#90A4AE"/>
+    <g fill="#1E1E24">
+      <rect x="-11" y="32" width="22" height="4"/>
+      <rect x="-14" y="36" width="28" height="6"/>
+      <rect x="-15" y="42" width="30" height="8"/>
+      <rect x="-16" y="50" width="32" height="18"/>
+      <rect x="-18" y="68" width="36" height="20"/>
+      <rect x="-20" y="88" width="40" height="12"/>
+      <rect x="-20" y="100" width="6" height="4"/><rect x="-12" y="100" width="6" height="4"/>
+      <rect x="-4" y="100" width="6" height="4"/><rect x="4" y="100" width="6" height="4"/><rect x="12" y="100" width="8" height="4"/>
+    </g>
+    <g fill="#4A4A55">
+      <rect x="-11" y="32" width="22" height="1"/><rect x="-14" y="36" width="1" height="6"/><rect x="-15" y="42" width="1" height="8"/>
+    </g>
+    <g fill="#2E2E36"><rect x="-6" y="58" width="2" height="42"/><rect x="6" y="62" width="2" height="38"/></g>
+    <rect x="-9" y="39" width="18" height="16" fill="#0B0B0E"/>
+    <rect x="-7" y="41" width="14" height="12" fill="#F2EFE6"/>
+    <rect x="3" y="46" width="4" height="7" fill="#CFC9B8"/>
+    <g fill="#0B0B0E">
+      <rect x="-5" y="44" width="4" height="4"/><rect x="1" y="44" width="4" height="4"/>
+      <rect x="-1" y="49" width="2" height="2"/>
+      <rect x="-4" y="52" width="8" height="1"/>
+    </g>
+    <rect x="-4" y="45" width="1" height="1" fill="#E53935"/><rect x="2" y="45" width="1" height="1" fill="#E53935"/>
+    <rect x="15" y="60" width="7" height="5" fill="#F2EFE6"/>
+    <rect x="15" y="62" width="7" height="1" fill="#CFC9B8"/>
+  </g>
+
+  <!-- hourglass, in the space the left arm leaves for the keyboard -->
+  <g transform="translate(14 6)" shape-rendering="crispEdges">
+    <g class="hourglass">
+      <rect x="3" y="3" width="10" height="6" fill="#E3F2FD"/><rect x="5" y="9" width="6" height="2" fill="#E3F2FD"/>
+      <rect x="7" y="11" width="2" height="2" fill="#E3F2FD"/>
+      <rect x="5" y="13" width="6" height="2" fill="#E3F2FD"/><rect x="3" y="15" width="10" height="6" fill="#E3F2FD"/>
+      <g class="sand-top" fill="#F4C542"><rect x="3" y="4" width="10" height="5"/><rect x="5" y="9" width="6" height="2"/></g>
+      <g class="sand-bottom" fill="#F4C542"><rect x="5" y="13" width="6" height="2"/><rect x="3" y="15" width="10" height="5"/></g>
+      <g class="stream" fill="#F4C542"><rect class="grain" x="7" y="11" width="2" height="2"/><rect class="grain g2" x="7" y="11" width="2" height="2"/></g>
+      <rect x="4" y="5" width="1" height="3" fill="#FFFFFF"/>
+      <rect x="0" y="0" width="16" height="3" fill="#8D6E63"/><rect x="0" y="0" width="16" height="1" fill="#BCAAA4"/>
+      <rect x="0" y="21" width="16" height="3" fill="#8D6E63"/><rect x="0" y="23" width="16" height="1" fill="#5D4037"/>
+      <rect x="0" y="3" width="2" height="18" fill="#6D4C41"/><rect x="14" y="3" width="2" height="18" fill="#6D4C41"/>
+    </g>
+  </g>
+
+  <!-- "!!" -->
+  <g class="bang"><g class="bang-pop" shape-rendering="crispEdges">
+    <g fill="#b51f8a"><rect x="103" y="2" width="5" height="10"/><rect x="103" y="13" width="5" height="4"/>
+      <rect x="111" y="2" width="5" height="10"/><rect x="111" y="13" width="5" height="4"/></g>
+    <g fill="#f4552a"><rect x="102" y="1" width="4" height="9"/><rect x="102" y="12" width="4" height="3"/>
+      <rect x="110" y="1" width="4" height="9"/><rect x="110" y="12" width="4" height="3"/></g>
+  </g></g>
+
+  <g class="grovel" shape-rendering="crispEdges" fill="#D97757">
+    <g><rect data-part="leg" x="42" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="63" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="86" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="107" y="76" width="11" height="26"/></g>
+    <rect data-part="body" x="32" y="16" width="96" height="60"/>
+
+    <!-- eye sets, one visible at a time -->
+    <g class="eyes-calm"><g fill="#2f2f38"><rect x="44" y="31" width="11" height="10"/><rect x="105" y="31" width="11" height="10"/></g></g>
+    <g class="eyes-glance"><g fill="#2f2f38"><rect x="48" y="28" width="11" height="10"/><rect x="109" y="28" width="11" height="10"/></g></g>
+    <g class="eyes-nervous"><g><g fill="#2f2f38"><rect x="44" y="28" width="11" height="10"/><rect x="105" y="28" width="11" height="10"/></g><rect x="45" y="29" width="3" height="3" fill="#FFFFFF"/><rect x="106" y="29" width="3" height="3" fill="#FFFFFF"/></g><g fill="#2f2f38"><rect x="43" y="20" width="4" height="4"/><rect x="48" y="18" width="4" height="4"/><rect x="109" y="18" width="4" height="4"/><rect x="114" y="20" width="4" height="4"/></g></g>
+    <g class="eyes-panic"><g><g fill="#2f2f38"><rect x="43" y="27" width="13" height="12"/><rect x="104" y="27" width="13" height="12"/></g><g fill="#FFFFFF"><rect x="46" y="30" width="7" height="6"/><rect x="107" y="30" width="7" height="6"/></g><g class="pupils" fill="#2f2f38"><rect x="48" y="31" width="3" height="4"/><rect x="109" y="31" width="3" height="4"/></g></g><g fill="#2f2f38"><rect x="43" y="20" width="4" height="4"/><rect x="48" y="18" width="4" height="4"/><rect x="109" y="18" width="4" height="4"/><rect x="114" y="20" width="4" height="4"/></g><rect x="76" y="44" width="8" height="8" fill="#2f2f38"/><rect x="78" y="46" width="4" height="4" fill="#FFFFFF"/></g>
+    <g class="eyes-slam"><g fill="#2f2f38"><rect x="44" y="28" width="4" height="5"/><rect x="51" y="28" width="4" height="5"/><rect x="47" y="33" width="5" height="5"/><rect x="105" y="28" width="4" height="5"/><rect x="112" y="28" width="4" height="5"/><rect x="108" y="33" width="5" height="5"/></g><rect x="76" y="46" width="8" height="4" fill="#FFFFFF"/></g>
+    <g class="eyes-relief"><g fill="#2f2f38"><rect x="47" y="28" width="5" height="5"/><rect x="44" y="33" width="4" height="5"/><rect x="51" y="33" width="4" height="5"/><rect x="108" y="28" width="5" height="5"/><rect x="105" y="33" width="4" height="5"/><rect x="112" y="33" width="4" height="5"/></g><g fill="#FFFFFF"><rect x="72" y="44" width="4" height="4"/><rect x="84" y="44" width="4" height="4"/><rect x="76" y="48" width="4" height="4"/><rect x="80" y="48" width="4" height="4"/></g><g fill="#F48FB1"><rect x="36" y="42" width="4" height="4"/><rect x="40" y="42" width="4" height="4"/><rect x="116" y="42" width="4" height="4"/><rect x="120" y="42" width="4" height="4"/></g></g>
+
+    <g class="sweat"><g class="drop-r" fill="#3eadff"><rect x="124" y="18" width="4" height="4"/></g><g class="drop-l" fill="#3eadff"><rect x="32" y="22" width="4" height="4"/></g></g>
+
+    <g class="arm-l"><rect data-part="arm" x="44" y="62" width="20" height="20"/></g><g class="arm-r"><rect data-part="arm" x="96" y="62" width="20" height="20"/></g>
+
+    <rect x="56" y="60" width="48" height="32" fill="#8A9099"/><rect x="56" y="60" width="48" height="4" fill="#B0B5BD"/>
+    <rect x="76" y="72" width="8" height="8" fill="#FFFFFF"/><rect x="50" y="92" width="60" height="6" fill="#B0B5BD"/>
+
+    <g class="speed" fill="#3eadff"><g class="speed-blink">
+      <rect x="34" y="66" width="6" height="2"/><rect x="36" y="72" width="4" height="2"/>
+      <rect x="120" y="66" width="6" height="2"/><rect x="120" y="72" width="4" height="2"/>
+    </g></g>
+  </g>
+
+  <!-- Enter: sparks off the laptop -->
+  <g class="sparks" shape-rendering="crispEdges"><g class="spark-blink">
+    <g fill="#FFB300">
+      <rect x="105" y="49" width="4" height="9"/><rect x="109" y="55" width="9" height="4"/><rect x="111" y="47" width="6" height="6"/>
+      <rect x="51" y="49" width="4" height="9"/><rect x="42" y="55" width="9" height="4"/><rect x="43" y="47" width="6" height="6"/>
+      <rect x="78" y="44" width="4" height="10"/>
+    </g>
+    <g fill="#FFFFFF">
+      <rect x="106" y="50" width="2" height="7"/><rect x="110" y="56" width="7" height="2"/><rect x="112" y="48" width="4" height="4"/>
+      <rect x="52" y="50" width="2" height="7"/><rect x="43" y="56" width="7" height="2"/><rect x="44" y="48" width="4" height="4"/>
+      <rect x="79" y="45" width="2" height="8"/>
+    </g>
+  </g></g>
+
+  <!-- relieved sigh -->
+  <g class="sigh" shape-rendering="crispEdges">
+    <rect x="16" y="46" width="10" height="6" fill="#ECEFF1"/><rect x="12" y="48" width="4" height="4" fill="#ECEFF1"/>
+    <rect x="20" y="42" width="6" height="4" fill="#ECEFF1"/>
+  </g>
+
+  <!-- reaper's sleeve and bony hand on Grovel's shoulder, in front, moving with the reaper -->
+  <g class="reaper" shape-rendering="crispEdges"><g class="reach"><g class="pat">
+    <rect x="-36" y="42" width="22" height="7" fill="#1E1E24"/><rect x="-36" y="42" width="22" height="1" fill="#4A4A55"/>
+    <rect x="-43" y="40" width="8" height="7" fill="#F2EFE6"/>
+    <rect x="-43" y="47" width="2" height="3" fill="#F2EFE6"/><rect x="-40" y="47" width="2" height="3" fill="#F2EFE6"/>
+    <rect x="-37" y="47" width="2" height="2" fill="#F2EFE6"/><rect x="-43" y="43" width="8" height="1" fill="#CFC9B8"/>
+  </g></g></g>
+  </g>
+</svg>

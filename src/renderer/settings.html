@@ -1,0 +1,568 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'"
+    />
+    <title>OpenPlead</title>
+    <style>
+      /* The same HUD language as the nameplate: system font, hairlines, light and dark from the OS. */
+      :root {
+        --bg: #f6f6f7;
+        --card: #ffffff;
+        --border: rgba(0, 0, 0, 0.12);
+        --text: #242427;
+        --muted: #6b6b70;
+        --grovel: #d97757;
+        --run: #16a34a;
+        --attn: #d97706;
+        --bad: #dc2626;
+        --focus: #a55a42; /* Grovel's orange, deepened until it reaches 3:1 on the light background (WCAG 1.4.11) */
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1b1b1f;
+          --focus: #d97757;
+          --card: #242428;
+          --border: rgba(255, 255, 255, 0.12);
+          --text: #f4f4f5;
+          --muted: #a1a1aa;
+          --run: #4ade80;
+          --bad: #f87171;
+        }
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          13px/1.45 -apple-system,
+          'Segoe UI',
+          system-ui,
+          sans-serif;
+        user-select: none;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px 0;
+      }
+      header h1 {
+        font-size: 15px;
+        margin: 0;
+        font-weight: 700;
+      }
+      header .mark {
+        width: 18px;
+        height: 14px;
+        background: var(--grovel);
+        border-radius: 3px 3px 1px 1px;
+        box-shadow:
+          inset 3px 4px 0 0 #2f2f38,
+          inset -3px 4px 0 0 #2f2f38;
+      }
+      nav {
+        display: flex;
+        gap: 2px;
+        padding: 12px 18px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      nav button {
+        appearance: none;
+        border: 0;
+        background: none;
+        color: var(--muted);
+        font: inherit;
+        font-weight: 600;
+        padding: 6px 8px 10px;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+      }
+      nav button.on {
+        color: var(--text);
+        border-bottom-color: var(--grovel);
+      }
+      nav button[hidden] {
+        display: none;
+      }
+      main {
+        flex: 1;
+        min-height: 0;
+        padding: 14px 18px 18px;
+        overflow: auto;
+        box-sizing: border-box;
+      }
+      section[hidden] {
+        display: none;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+      }
+      .card h2 {
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 8px;
+      }
+      .row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 7px 0;
+        border-top: 1px solid var(--border);
+      }
+      .row:first-of-type {
+        border-top: 0;
+      }
+      .row .text {
+        flex: 1;
+      }
+      .row .hint {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .row input {
+        margin-top: 3px;
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 0;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--muted);
+        flex: none;
+      }
+      .dot.ok {
+        background: var(--run);
+      }
+      .dot.warn {
+        background: var(--attn);
+      }
+      .dot.bad {
+        background: var(--bad);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      button.action {
+        appearance: none;
+        font: inherit;
+        font-weight: 600;
+        padding: 7px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        cursor: pointer;
+      }
+      button.action.primary {
+        background: var(--grovel);
+        border-color: var(--grovel);
+        color: #242427; /* 4.9:1 on the orange; white would be 3.1:1 (WCAG 1.4.3) */
+      }
+      button.action:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .steps {
+        counter-reset: step;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .steps li {
+        counter-increment: step;
+        display: flex;
+        gap: 12px;
+        padding: 8px 0;
+        border-top: 1px solid var(--border);
+      }
+      .steps li:first-child {
+        border-top: 0;
+      }
+      .steps li::before {
+        content: counter(step);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--grovel);
+        color: #fff;
+        font-weight: 700;
+        display: grid;
+        place-items: center;
+        flex: none;
+        font-size: 12px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      code {
+        font:
+          12px ui-monospace,
+          'SF Mono',
+          Menlo,
+          Consolas,
+          monospace;
+      }
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 64px;
+        margin: 4px 0 10px;
+        padding: 6px 8px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        color: var(--text);
+        font:
+          12px/1.4 ui-monospace,
+          'SF Mono',
+          Menlo,
+          Consolas,
+          monospace;
+        resize: vertical;
+      }
+      footer {
+        flex: none;
+        padding: 8px 18px 10px;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 12px;
+        min-height: 1.45em;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .card .sub {
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid var(--border);
+      }
+      .card .label {
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      details.advanced {
+        margin-top: 10px;
+      }
+      details.advanced > summary {
+        cursor: pointer;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 12px;
+      }
+      /* One phrase set: a name, when Grovel uses it, a one-line preview; open it to edit the lines. */
+      details.set {
+        border-top: 1px solid var(--border);
+        padding: 6px 0;
+      }
+      details.set:first-of-type {
+        border-top: 0;
+      }
+      details.set > summary {
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0 10px;
+        list-style: none;
+      }
+      details.set > summary::-webkit-details-marker {
+        display: none;
+      }
+      details.set .name {
+        font-weight: 600;
+      }
+      details.set .when {
+        color: var(--muted);
+        font-size: 12px;
+        text-align: right;
+      }
+      details.set .preview {
+        grid-column: 1 / -1;
+        color: var(--muted);
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      details.set[open] .preview {
+        display: none;
+      }
+      details.set .lines {
+        list-style: none;
+        margin: 8px 0 0;
+        padding: 0;
+      }
+      details.set .line {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 3px 0;
+      }
+      details.set .line::before {
+        content: '•';
+        color: var(--grovel);
+        font-weight: 700;
+        line-height: 1.5;
+        flex: none;
+      }
+      details.set .line textarea {
+        flex: 1;
+        min-height: 0;
+        margin: 0;
+        padding: 4px 8px;
+        resize: none;
+        overflow: hidden;
+        font:
+          13px/1.45 -apple-system,
+          'Segoe UI',
+          system-ui,
+          sans-serif;
+      }
+      details.set .remove {
+        appearance: none;
+        border: 0;
+        background: none;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.3;
+        cursor: pointer;
+        padding: 0 4px;
+        flex: none;
+      }
+      details.set .remove:hover {
+        color: var(--bad);
+      }
+      details.set .add {
+        margin: 6px 0 4px 18px;
+        padding: 4px 10px;
+        font-size: 12px;
+      }
+      /* One reply: what Grovel said, what Claude answered, and the card button first. */
+      .reply .who {
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .reply .who:first-child {
+        margin-top: 0;
+      }
+      .reply .who.agent {
+        color: var(--grovel);
+      }
+      .reply .line {
+        margin: 2px 0 2px;
+      }
+      .about-links {
+        margin: 8px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="mark"></span>
+      <h1>OpenPlead</h1>
+    </header>
+    <nav role="tablist" aria-label="Settings panes">
+      <button role="tab" id="tab-welcome" aria-controls="panel-welcome" data-tab="welcome" hidden>Welcome</button>
+      <button role="tab" id="tab-grovel" aria-controls="panel-grovel" data-tab="grovel">Grovel</button>
+      <button role="tab" id="tab-messages" aria-controls="panel-messages" data-tab="messages">Messages</button>
+      <button role="tab" id="tab-replies" aria-controls="panel-replies" data-tab="replies">Replies</button>
+      <button role="tab" id="tab-connection" aria-controls="panel-connection" data-tab="connection">Connection</button>
+      <button role="tab" id="tab-about" aria-controls="panel-about" data-tab="about">About</button>
+    </nav>
+    <main>
+      <section role="tabpanel" id="panel-welcome" aria-labelledby="tab-welcome" tabindex="0" data-tab="welcome" hidden>
+        <div class="card">
+          <h2>Start here</h2>
+          <ol class="steps">
+            <li>
+              <div>
+                <div class="status"><span class="dot" id="welcome-dot"></span><span id="welcome-hooks"></span></div>
+                <div class="actions">
+                  <button class="action primary" data-action="install" id="welcome-install">
+                    Connect to Claude Code
+                  </button>
+                </div>
+                <p class="hint" id="welcome-hint">
+                  Adds a few hook entries to <code>~/.claude/settings.json</code>, and to Cursor's
+                  <code>hooks.json</code> when Cursor is on. A <code>.bak</code> is kept. Nothing else changes.
+                </p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <b>Click Grovel to plead.</b> Once is polite, five times is a sob. The line reaches Claude with its next
+                tool call, or with your next message if Claude is waiting for you.
+                <div class="actions"><button class="action" data-action="demo">Show me (20 s)</button></div>
+              </div>
+            </li>
+            <li>
+              <div><b>Right-click Grovel</b> to thank, reassure, set a deadline, or read Claude's replies.</div>
+            </li>
+          </ol>
+          <div class="actions">
+            <button class="action primary" data-action="done">Done</button>
+          </div>
+        </div>
+      </section>
+      <section role="tabpanel" id="panel-grovel" aria-labelledby="tab-grovel" tabindex="0" data-tab="grovel" hidden>
+        <div class="card">
+          <h2>When is Grovel on screen?</h2>
+          <div id="show-modes"></div>
+          <div id="follow"></div>
+        </div>
+        <div class="card">
+          <h2>Sound and chatter</h2>
+          <div id="sounds"></div>
+          <div class="actions"><button class="action" data-action="chime">Play the chime</button></div>
+          <div class="sub">
+            <div class="label">Mute</div>
+            <div id="mute"></div>
+            <p class="hint">Muted means no sounds and no chatter. Sent, dropped and replies still show.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Plead from the keyboard</h2>
+          <div id="hotkeys"></div>
+          <p class="hint">Same as clicking Grovel.</p>
+        </div>
+        <div class="card">
+          <h2>Position</h2>
+          <p class="muted">Drag Grovel anywhere. Drag him to a screen edge and he parks there, peeking out on hover.</p>
+          <div class="actions">
+            <button class="action" data-action="unpark" id="unpark">Unpark</button>
+            <button class="action" data-action="resetPosition">Put him back in the bottom-right corner</button>
+          </div>
+        </div>
+      </section>
+      <section
+        role="tabpanel"
+        id="panel-messages"
+        aria-labelledby="tab-messages"
+        tabindex="0"
+        data-tab="messages"
+        hidden
+      >
+        <div class="card">
+          <h2>Automatic messages</h2>
+          <div id="auto"></div>
+        </div>
+        <div class="card">
+          <h2>The lines Grovel uses</h2>
+          <p class="muted">
+            A random line from the set is used, never the same one twice in a row. Open a set to edit it, one line per
+            row.
+          </p>
+          <div id="phrase-sets"></div>
+          <div class="actions">
+            <button class="action primary" data-phrases="save">Save</button>
+            <button class="action" data-action="importPhrases">Import a pack…</button>
+            <button class="action" data-phrases="reset">Reset to defaults</button>
+            <span class="muted" id="phrases-status"></span>
+          </div>
+          <details class="advanced">
+            <summary>Advanced</summary>
+            <p class="hint">The file is <code>~/.openplead/phrases.json</code>; edits there apply at once.</p>
+            <div class="actions"><button class="action" data-action="openPhrases">Open the file…</button></div>
+          </details>
+        </div>
+      </section>
+      <section role="tabpanel" id="panel-replies" aria-labelledby="tab-replies" tabindex="0" data-tab="replies" hidden>
+        <div class="card">
+          <div id="invite-replies"></div>
+        </div>
+        <div id="replies"></div>
+        <div class="actions">
+          <button class="action" data-action="clearReplies" id="clear-replies">Clear all</button>
+        </div>
+      </section>
+      <section
+        role="tabpanel"
+        id="panel-connection"
+        aria-labelledby="tab-connection"
+        tabindex="0"
+        data-tab="connection"
+        hidden
+      >
+        <div class="card">
+          <div class="status"><span class="dot" id="hooks-dot"></span><b id="hooks-line"></b></div>
+          <p class="hint" id="hooks-detail"></p>
+          <div class="actions">
+            <button class="action primary" data-action="install" id="install">Connect to Claude Code</button>
+            <button class="action" data-action="uninstall" id="uninstall">Disconnect</button>
+          </div>
+          <div id="cursor"></div>
+        </div>
+        <div class="card">
+          <div class="actions"><button class="action" data-action="checkConnection">Check the connection</button></div>
+          <div class="status" id="check-row" hidden>
+            <span class="dot" id="check-dot"></span><span id="check-line"></span>
+          </div>
+          <details class="advanced">
+            <summary>Advanced</summary>
+            <p class="hint" id="port-line"></p>
+            <p class="hint">
+              Hook entries live in <code>~/.claude/settings.json</code> and <code>~/.cursor/hooks.json</code>; a
+              <code>.bak</code> is kept. Disconnect removes them.
+            </p>
+            <p class="hint" id="over-line"></p>
+            <div id="sessions"></div>
+            <div class="actions"><button class="action" data-action="openLog">Open the log…</button></div>
+          </details>
+        </div>
+      </section>
+      <section role="tabpanel" id="panel-about" aria-labelledby="tab-about" tabindex="0" data-tab="about" hidden>
+        <div class="card">
+          <h2>OpenPlead</h2>
+          <p id="about-version"></p>
+          <p id="about-record"></p>
+          <div class="actions">
+            <button class="action" data-action="copyRecord">Copy my record</button>
+            <button class="action" data-action="demo">Show me (20 s)</button>
+            <button class="action" data-open-tab="welcome">Open the Welcome page</button>
+          </div>
+          <p class="hint about-links">
+            Stop whipping. Start pleading. Code is MIT. Grovel's look nods to Anthropic's crab mascot. Not affiliated
+            with or endorsed by Anthropic.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer id="footer"></footer>
+    <script src="case.js"></script>
+    <script src="settings.js"></script>
+    <script src="settings-phrases.js"></script>
+  </body>
+</html>

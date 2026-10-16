@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Shrug: nothing to plead for. Both arms lift and hold, eyes glance left and right, a small '?' pops up. 1 s loop. Geometry from grovel-base.svg. -->
+  <style>
+    .arms { animation: lift 1s ease-in-out infinite; }
+    .eyes { animation: glance 1s steps(1, end) infinite; }
+    .q { animation: qpop 1s ease-out infinite; }
+    @keyframes lift { 0%, 100% { transform: translateY(0); } 40%, 70% { transform: translateY(-10px); } }
+    @keyframes glance { 0%, 100% { transform: translateX(0); } 40% { transform: translateX(4px); } 70% { transform: translateX(-4px); } }
+    @keyframes qpop { 0% { transform: translateY(4px); opacity: 0; } 30%, 80% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-4px); opacity: 0; } }
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="56" ry="4" fill="#000" opacity="0.15"/>
+    <g class="q" shape-rendering="crispEdges"><g fill="#2c8c5e"><rect x="136" y="-14" width="4" height="4"/><rect x="140" y="-14" width="4" height="4"/><rect x="144" y="-14" width="4" height="4"/><rect x="132" y="-10" width="4" height="4"/><rect x="148" y="-10" width="4" height="4"/><rect x="148" y="-6" width="4" height="4"/><rect x="144" y="-2" width="4" height="4"/><rect x="140" y="2" width="4" height="4"/><rect x="140" y="10" width="4" height="4"/></g></g>
+    <g shape-rendering="crispEdges" fill="#D97757">
+      <g><rect data-part="leg" x="42" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="63" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="86" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="107" y="76" width="11" height="26"/></g>
+      <rect data-part="body" x="32" y="16" width="96" height="60"/>
+      <g class="eyes"><g fill="#2f2f38"><rect x="44" y="28" width="11" height="10"/><rect x="105" y="28" width="11" height="10"/></g></g>
+      <rect x="76" y="46" width="8" height="4" fill="#FFFFFF"/>
+      <g class="arms"><g class=""><rect data-part="arm" x="12" y="36" width="20" height="20"/></g><g class=""><rect data-part="arm" x="128" y="36" width="20" height="20"/></g></g>
+    </g>
+  </g>
+</svg>

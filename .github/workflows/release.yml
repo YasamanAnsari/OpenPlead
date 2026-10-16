@@ -1,0 +1,51 @@
+name: release
+
+# Builds the installers on a version tag (v1.2.3) and attaches them to a draft GitHub release.
+# Code signing is not configured: add the electron-builder signing secrets before publishing to users.
+env:
+  PUPPETEER_SKIP_DOWNLOAD: '1' # the headless renders are local tools, not part of the build
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: installers (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run dist -- --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installers-${{ matrix.os }}
+          path: |
+            dist/*.dmg
+            dist/*.zip
+            dist/*.exe
+            dist/*.AppImage
+          if-no-files-found: ignore
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: installers
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: installers/**/*

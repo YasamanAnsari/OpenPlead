@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Grovel, static reference (the mascot proportions): body 96x60 at (32,16), arms 20x20 at (12,36) and (128,36), eyes 11x10 at (44,28) and (105,28), legs 11x26 at x 42/63/86/107, y 76. Flat #D97757, navy #2f2f38 eyes. -->
+  <style>
+    
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="56" ry="4" fill="#000" opacity="0.15"/>
+    <g shape-rendering="crispEdges" fill="#D97757">
+      <g><rect data-part="leg" x="42" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="63" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="86" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="107" y="76" width="11" height="26"/></g>
+      <rect data-part="body" x="32" y="16" width="96" height="60"/>
+      <g><g fill="#2f2f38"><rect x="44" y="28" width="11" height="10"/><rect x="105" y="28" width="11" height="10"/></g></g>
+      <g class=""><rect data-part="arm" x="12" y="36" width="20" height="20"/></g><g class=""><rect data-part="arm" x="128" y="36" width="20" height="20"/></g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src file:"
+    />
+    <title>Reply card</title>
+    <style>
+      /* A 1200x675 card: what went out, what came back. Rendered off screen and saved as a PNG. */
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 675px;
+        overflow: hidden;
+        background: #14151b;
+        color: #f4f4f5;
+        font:
+          16px -apple-system,
+          'Segoe UI',
+          system-ui,
+          sans-serif;
+      }
+      body::before {
+        /* the stage light behind Grovel, and the dot grid of the pet's own window */
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(420px 360px at 190px 520px, rgba(217, 119, 87, 0.28), transparent 70%),
+          radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size:
+          auto,
+          28px 28px;
+      }
+      .top {
+        position: absolute;
+        left: 56px;
+        right: 56px;
+        top: 44px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 15px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #8a8a93;
+      }
+      .mark {
+        display: inline-block;
+        width: 18px;
+        height: 14px;
+        background: #d97757;
+        border-radius: 3px 3px 1px 1px;
+        box-shadow:
+          inset 3px 4px 0 0 #14151b,
+          inset -3px 4px 0 0 #14151b;
+        vertical-align: -1px;
+        margin-right: 10px;
+      }
+      .top b {
+        color: #f4f4f5;
+        font-weight: 700;
+      }
+      .pill {
+        border: 1.5px solid #d97757;
+        color: #d97757;
+        border-radius: 999px;
+        padding: 6px 14px;
+        margin-left: 14px;
+        letter-spacing: 0.12em;
+      }
+      .pill:empty {
+        display: none;
+      }
+      .pet {
+        position: absolute;
+        left: 50px;
+        bottom: 96px;
+        width: 290px;
+        height: 237px;
+        image-rendering: pixelated;
+      }
+      .floor {
+        position: absolute;
+        left: 90px;
+        bottom: 84px;
+        width: 210px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.45);
+        filter: blur(6px);
+      }
+      .col {
+        position: absolute;
+        left: 400px;
+        right: 56px;
+        top: 118px;
+        bottom: 92px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 38px;
+      }
+      .eyebrow {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #8a8a93;
+        margin-bottom: 14px;
+      }
+      .plea {
+        position: relative;
+        padding-left: 46px;
+        font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+        font-size: 40px;
+        line-height: 1.22;
+        color: #f4e9d8;
+        letter-spacing: -0.005em;
+      }
+      .plea::before {
+        /* the oversized opening quote, hung in the margin */
+        content: '\201C';
+        position: absolute;
+        left: -12px;
+        top: -22px;
+        font-size: 120px;
+        line-height: 1;
+        color: #d97757;
+      }
+      .reply {
+        position: relative;
+        padding: 26px 32px 28px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.045);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      }
+      .reply::before {
+        /* the stem of a speech bubble, pointing back at the plea */
+        content: '';
+        position: absolute;
+        left: 40px;
+        top: -11px;
+        width: 20px;
+        height: 20px;
+        transform: rotate(45deg);
+        background: #1d1e26;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .reply .eyebrow {
+        color: #d97757;
+        margin-bottom: 10px;
+      }
+      .reply .text {
+        font-size: 30px;
+        line-height: 1.32;
+        color: #f4f4f5;
+      }
+      .foot {
+        position: absolute;
+        left: 400px;
+        right: 56px;
+        bottom: 46px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 15px;
+        color: #6f6f78;
+      }
+      .foot i {
+        font-style: normal;
+        color: #8a8a93;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <span><span class="mark"></span><b>OpenPlead</b></span>
+      <span><span id="when"></span><span class="pill" id="label"></span></span>
+    </div>
+    <div class="floor"></div>
+    <canvas class="pet" id="pet" width="290" height="237"></canvas>
+    <div class="col">
+      <div>
+        <div class="eyebrow">You, through Grovel</div>
+        <div class="plea" id="plea"></div>
+      </div>
+      <div class="reply">
+        <div class="eyebrow" id="agent">The agent</div>
+        <div class="text" id="reply"></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span>The reply, as written</span>
+      <span><i>Pleads, never whips</i> · a desktop pet for your coding agent</span>
+    </div>
+    <script src="card.js"></script>
+  </body>
+</html>

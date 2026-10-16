@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How a click reaches the agent</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f6f4ef;
+      --color-ink:     #2f2f38;
+      --color-muted:   #5b5b66;
+      --color-accent:  #d97757;
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+    svg { width: 100%; min-width: 960px; display: block; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Architecture · OpenPlead</p>
+    <h1>How a click reaches the agent</h1>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="architecture-title architecture-desc">
+        <title id="architecture-title">How a click reaches the agent</title>
+        <desc id="architecture-desc">Claude Code and Cursor send hook events to a local server, adapters turn them into events for a pure reducer, the main process renders Grovel and persists state, and the chosen line travels back to the agent inside the hook reply.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5b5b66"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#d97757"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f6f4ef"/>
+
+        <!-- Zones -->
+        <rect x="40" y="80" width="176" height="232" rx="8" fill="rgba(47,47,56,0.02)" stroke="rgba(47,47,56,0.10)" stroke-width="0.8"/>
+        <rect x="88" y="84" width="80" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="128" y="93" fill="rgba(47,47,56,0.40)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">YOUR AGENT</text>
+
+        <rect x="256" y="80" width="224" height="232" rx="8" fill="rgba(47,47,56,0.02)" stroke="rgba(47,47,56,0.10)" stroke-width="0.8"/>
+        <rect x="344" y="84" width="48" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="368" y="93" fill="rgba(47,47,56,0.40)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">HOOKS</text>
+
+        <rect x="520" y="80" width="400" height="352" rx="8" fill="rgba(47,47,56,0.02)" stroke="rgba(47,47,56,0.10)" stroke-width="0.8"/>
+        <rect x="684" y="84" width="72" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="720" y="93" fill="rgba(47,47,56,0.40)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.14em">OPENPLEAD</text>
+
+        <!-- Arrows (drawn before nodes) -->
+        <!-- Claude Code -> server, http hooks -->
+        <line x1="200" y1="132" x2="280" y2="132" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <rect x="212" y="112" width="56" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="240" y="121" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">HTTP HOOKS</text>
+        <!-- server -> Claude Code, the reply carrying your line -->
+        <line x1="280" y1="148" x2="200" y2="148" stroke="#d97757" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow-accent)"/>
+        <rect x="214" y="156" width="52" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="240" y="165" fill="#d97757" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">YOUR LINE</text>
+
+        <!-- Cursor -> shim, command hooks -->
+        <line x1="200" y1="248" x2="280" y2="248" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="206" y="228" width="68" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="240" y="237" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">COMMAND HOOKS</text>
+        <!-- shim -> Cursor, the reply on stdout -->
+        <line x1="280" y1="272" x2="200" y2="272" stroke="#d97757" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow-accent)"/>
+        <rect x="214" y="280" width="52" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="240" y="289" fill="#d97757" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">YOUR LINE</text>
+
+        <!-- shim -> server -->
+        <line x1="368" y1="232" x2="368" y2="168" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="376" y="192" width="56" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="404" y="201" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">POST /OPENPLEAD/HOOK</text>
+
+        <!-- server -> adapters -->
+        <line x1="456" y1="140" x2="544" y2="140" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="476" y="120" width="48" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="500" y="129" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">PAYLOAD</text>
+
+        <!-- adapters -> reducer -->
+        <line x1="704" y1="140" x2="744" y2="140" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="708" y="120" width="32" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="724" y="129" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">EVENT</text>
+
+        <!-- reducer -> main -->
+        <line x1="820" y1="168" x2="820" y2="232" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="828" y="194" width="44" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="850" y="203" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">EFFECTS</text>
+
+        <!-- main -> window -->
+        <line x1="820" y1="288" x2="820" y2="352" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="828" y="314" width="32" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="844" y="323" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">VIEW</text>
+
+        <!-- main -> disk (passive) -->
+        <path d="M744,260 H632 Q624,260 624,268 V352" fill="none" stroke="#5b5b66" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <rect x="632" y="304" width="76" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="670" y="313" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">STATE ON DISK</text>
+
+        <!-- Nodes -->
+        <!-- Claude Code (external) -->
+        <rect x="56" y="112" width="144" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="56" y="112" width="144" height="56" rx="6" fill="rgba(47,47,56,0.03)" stroke="rgba(47,47,56,0.30)" stroke-width="1"/>
+        <rect x="64" y="118" width="36" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.30)" stroke-width="0.8"/>
+        <text x="82" y="127" fill="rgba(47,47,56,0.70)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="128" y="146" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Claude Code</text>
+        <text x="128" y="160" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">settings.json hooks</text>
+
+        <!-- Cursor (external) -->
+        <rect x="56" y="232" width="144" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="56" y="232" width="144" height="56" rx="6" fill="rgba(47,47,56,0.03)" stroke="rgba(47,47,56,0.30)" stroke-width="1"/>
+        <rect x="64" y="238" width="36" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.30)" stroke-width="0.8"/>
+        <text x="82" y="247" fill="rgba(47,47,56,0.70)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="128" y="266" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Cursor</text>
+        <text x="128" y="280" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">hooks.json</text>
+
+        <!-- Local server (backend) -->
+        <rect x="280" y="112" width="176" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="280" y="112" width="176" height="56" rx="6" fill="#ffffff" stroke="#2f2f38" stroke-width="1"/>
+        <rect x="288" y="118" width="32" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.40)" stroke-width="0.8"/>
+        <text x="304" y="127" fill="rgba(47,47,56,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">HTTP</text>
+        <text x="368" y="146" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Local server</text>
+        <text x="368" y="160" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">src/system/server.js · :47821</text>
+
+        <!-- Hook shim (backend) -->
+        <rect x="280" y="232" width="176" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="280" y="232" width="176" height="56" rx="6" fill="#ffffff" stroke="#2f2f38" stroke-width="1"/>
+        <rect x="288" y="238" width="36" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.40)" stroke-width="0.8"/>
+        <text x="306" y="247" fill="rgba(47,47,56,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">STDIO</text>
+        <text x="368" y="266" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Hook shim</text>
+        <text x="368" y="280" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">bin/openplead-hook.js</text>
+
+        <!-- Adapters (backend) -->
+        <rect x="544" y="112" width="160" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="544" y="112" width="160" height="56" rx="6" fill="#ffffff" stroke="#2f2f38" stroke-width="1"/>
+        <rect x="552" y="118" width="28" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.40)" stroke-width="0.8"/>
+        <text x="566" y="127" fill="rgba(47,47,56,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">I/O</text>
+        <text x="624" y="146" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Agent adapters</text>
+        <text x="624" y="160" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">src/agents/</text>
+
+        <!-- Reducer (backend, strong stroke) -->
+        <rect x="744" y="112" width="152" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="744" y="112" width="152" height="56" rx="6" fill="#ffffff" stroke="#2f2f38" stroke-width="1.2"/>
+        <rect x="752" y="118" width="32" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.40)" stroke-width="0.8"/>
+        <text x="768" y="127" fill="rgba(47,47,56,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">PURE</text>
+        <text x="820" y="146" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Reducer</text>
+        <text x="820" y="160" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">src/core/state.js</text>
+
+        <!-- Main process (backend) -->
+        <rect x="744" y="232" width="152" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="744" y="232" width="152" height="56" rx="6" fill="#ffffff" stroke="#2f2f38" stroke-width="1"/>
+        <rect x="752" y="238" width="48" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.40)" stroke-width="0.8"/>
+        <text x="776" y="247" fill="rgba(47,47,56,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ELECTRON</text>
+        <text x="820" y="266" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Main process</text>
+        <text x="820" y="280" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">src/main.js</text>
+
+        <!-- Grovel window (input/ui) -->
+        <rect x="744" y="352" width="152" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="744" y="352" width="152" height="56" rx="6" fill="rgba(91,91,102,0.10)" stroke="#8a8a93" stroke-width="1"/>
+        <rect x="752" y="358" width="24" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.40)" stroke-width="0.8"/>
+        <text x="764" y="367" fill="rgba(47,47,56,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">UI</text>
+        <text x="820" y="386" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Grovel window</text>
+        <text x="820" y="400" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">src/renderer/</text>
+
+        <!-- ~/.openplead (store) -->
+        <rect x="544" y="352" width="160" height="56" rx="6" fill="#f6f4ef"/>
+        <rect x="544" y="352" width="160" height="56" rx="6" fill="rgba(47,47,56,0.05)" stroke="#5b5b66" stroke-width="1"/>
+        <rect x="552" y="358" width="32" height="12" rx="2" fill="transparent" stroke="rgba(47,47,56,0.40)" stroke-width="0.8"/>
+        <text x="568" y="367" fill="rgba(47,47,56,0.80)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DISK</text>
+        <text x="624" y="386" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">~/.openplead/</text>
+        <text x="624" y="400" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">config · phrases · replies</text>
+
+        <!-- Legend -->
+        <line x1="40" y1="472" x2="920" y2="472" stroke="rgba(47,47,56,0.10)" stroke-width="0.8"/>
+        <text x="40" y="492" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text>
+        <rect x="120" y="483" width="20" height="12" rx="2" fill="rgba(47,47,56,0.03)" stroke="rgba(47,47,56,0.30)" stroke-width="1"/>
+        <text x="148" y="492" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">AGENT</text>
+        <rect x="216" y="483" width="20" height="12" rx="2" fill="#ffffff" stroke="#2f2f38" stroke-width="1"/>
+        <text x="244" y="492" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">OPENPLEAD CODE</text>
+        <rect x="360" y="483" width="20" height="12" rx="2" fill="rgba(47,47,56,0.05)" stroke="#5b5b66" stroke-width="1"/>
+        <text x="388" y="492" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">ON DISK</text>
+        <rect x="464" y="483" width="20" height="12" rx="2" fill="rgba(91,91,102,0.10)" stroke="#8a8a93" stroke-width="1"/>
+        <text x="492" y="492" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">WHAT YOU SEE</text>
+        <line x1="600" y1="489" x2="628" y2="489" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <text x="636" y="492" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">HOOK CALL</text>
+        <line x1="720" y1="489" x2="748" y2="489" stroke="#d97757" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow-accent)"/>
+        <text x="756" y="492" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">YOUR LINE, IN THE REPLY</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

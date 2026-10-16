@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Plead 3: kneeling (the same four legs folded: knees down, shins flat), hands clasped in front and pumping, raised brows, wet eyes with tears welling and falling in turn, lip wobbling, a sweat drop, body trembling. 2 s loop. Geometry from grovel-base.svg. -->
+  <style>
+    .upper { animation: tremble 0.5s steps(2, end) infinite; }
+    .arms { animation: pump 0.5s ease-in-out infinite; }
+    .tear-l { animation: tearL 2s ease-in infinite; } .tear-r { animation: tearR 2s ease-in infinite; }
+    .mA { animation: tog 0.4s steps(1, end) infinite; } .mB { animation: tog 0.4s steps(1, end) -0.2s infinite; }
+    .sweat { animation: sweat 2s linear infinite; }
+    .lids { animation: wLids 2s linear infinite; }
+    .shine { animation: wShine 2s linear infinite; } .tw { animation: blink 0.5s steps(1, end) infinite; }
+    @keyframes tearL { 0.000% { transform: translateY(0); opacity: 0 } 15.000% { transform: translateY(0); opacity: 0 } 25.000% { transform: translateY(0); opacity: 1 } 35.000% { transform: translateY(0); opacity: 1 } 55.000% { transform: translateY(14px); opacity: 0 } 100.000% { transform: translateY(14px); opacity: 0 } }
+    @keyframes tearR { 0.000% { transform: translateY(0); opacity: 0 } 55.000% { transform: translateY(0); opacity: 0 } 65.000% { transform: translateY(0); opacity: 1 } 75.000% { transform: translateY(0); opacity: 1 } 95.000% { transform: translateY(14px); opacity: 0 } 100.000% { transform: translateY(14px); opacity: 0 } }
+    @keyframes wLids { 0.000% { opacity: 0 } 87.450% { opacity: 0 } 87.500% { opacity: 1 } 94.950% { opacity: 1 } 95.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wShine { 0.000% { opacity: 0 } 9.950% { opacity: 0 } 10.000% { opacity: 1 } 89.950% { opacity: 1 } 90.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes sweat { 0.000% { transform: translateY(0); opacity: 0 } 40.000% { transform: translateY(0); opacity: 0 } 45.000% { opacity: 1 } 85.000% { transform: translateY(10px); opacity: 1 } 90.000% { transform: translateY(10px); opacity: 0 } 100.000% { transform: translateY(10px); opacity: 0 } }
+    @keyframes tremble { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(1px); } }
+    @keyframes pump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes tog { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="58" ry="4" fill="#000" opacity="0.15"/>
+    <g shape-rendering="crispEdges" fill="#D97757">
+      <g data-part="leg"><rect x="50" y="91" width="13" height="11" fill="#C4694B"/><rect x="63" y="89" width="11" height="13"/></g><g data-part="leg"><rect x="97" y="91" width="13" height="11" fill="#C4694B"/><rect x="86" y="89" width="11" height="13"/></g><g data-part="leg"><rect x="29" y="91" width="13" height="11" fill="#C4694B"/><rect x="42" y="89" width="11" height="13"/></g><g data-part="leg"><rect x="118" y="91" width="13" height="11" fill="#C4694B"/><rect x="107" y="89" width="11" height="13"/></g>
+      <g transform="translate(0 13)"><g class="upper">
+        <rect data-part="body" x="32" y="16" width="96" height="60"/>
+        <g fill="#2f2f38"><rect x="42" y="22" width="4" height="4"/><rect x="46" y="19" width="4" height="4"/><rect x="50" y="16" width="4" height="4"/><rect x="114" y="22" width="4" height="4"/><rect x="110" y="19" width="4" height="4"/><rect x="106" y="16" width="4" height="4"/></g>
+        <g><g fill="#2f2f38"><rect x="44" y="28" width="11" height="10"/><rect x="105" y="28" width="11" height="10"/></g><rect x="45" y="29" width="3" height="3" fill="#FFFFFF"/><rect x="106" y="29" width="3" height="3" fill="#FFFFFF"/></g>
+        <g fill="#50a8ff"><rect x="40" y="36" width="4" height="4"/><rect x="36" y="40" width="4" height="4"/><rect x="116" y="36" width="4" height="4"/><rect x="120" y="40" width="4" height="4"/></g>
+        <g class="lids"><rect x="43" y="27" width="13" height="12"/><rect x="104" y="27" width="13" height="12"/><g fill="#2f2f38"><rect x="44" y="32" width="11" height="3"/><rect x="105" y="32" width="11" height="3"/></g></g>
+        <g class="mA"><g fill="#FFFFFF"><rect x="76" y="44" width="4" height="4"/><rect x="80" y="44" width="4" height="4"/><rect x="72" y="48" width="4" height="4"/><rect x="84" y="48" width="4" height="4"/></g></g><g class="mB"><g fill="#FFFFFF"><rect x="76" y="45" width="4" height="4"/><rect x="80" y="45" width="4" height="4"/><rect x="72" y="48" width="4" height="4"/><rect x="84" y="48" width="4" height="4"/></g></g>
+        <g class="tear-l" fill="#3eadff"><rect x="40" y="40" width="5" height="5"/></g><g class="tear-r" fill="#3eadff"><rect x="115" y="40" width="5" height="5"/></g>
+        <g class="sweat" fill="#3eadff"><rect x="123" y="22" width="4" height="4"/></g>
+        <g class="arms"><g class=""><rect data-part="arm" x="60" y="44" width="20" height="20" stroke="#B5603F" stroke-width="2"/></g><g class=""><rect data-part="arm" x="76" y="48" width="20" height="20" stroke="#B5603F" stroke-width="2"/></g></g>
+        <g class="shine"><g class="tw"><g fill="#ffff39"><rect x="58" y="40" width="2" height="6"/><rect x="56" y="42" width="6" height="2"/></g><g fill="#ffff39"><rect x="100" y="70" width="2" height="6"/><rect x="98" y="72" width="6" height="2"/></g></g></g>
+      </g></g>
+    </g>
+  </g>
+</svg>

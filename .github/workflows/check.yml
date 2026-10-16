@@ -1,0 +1,75 @@
+name: check
+
+permissions:
+  contents: read
+
+env:
+  PUPPETEER_SKIP_DOWNLOAD: '1' # the headless renders are local tools, not part of check or smoke
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+
+jobs:
+  check:
+    name: lint, format, tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+
+  # The app itself, started on each platform: it must answer on its port, take one session's hooks and stop.
+  smoke:
+    name: start the app (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+      - run: npm run smoke
+        timeout-minutes: 5
+
+  # The live suite: a hidden copy of the app driven through real hooks and every Settings control. Needs a display,
+  # so Linux runs it under xvfb and macOS on its own session; Windows resolves the home directory differently and
+  # is covered by smoke only.
+  live:
+    name: live suite (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+      - if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum npm run live
+        timeout-minutes: 10
+      - if: runner.os == 'macOS'
+        run: npm run live
+        timeout-minutes: 10

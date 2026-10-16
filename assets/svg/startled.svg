@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Startled: woken by the pointer. The whole body hops, the eyes go wide (13x14), both arms snap up, a '!' pops over the head. 0.9 s loop, matching the transient. Geometry from grovel-base.svg. -->
+  <style>
+    .pet { animation: hop 0.9s ease-out infinite; }
+    .arms { animation: snap 0.9s ease-out infinite; }
+    .bang { animation: pop 0.9s ease-out infinite; }
+    @keyframes hop { 0% { transform: translateY(0); } 15% { transform: translateY(-8px); } 35%, 100% { transform: translateY(0); } }
+    @keyframes snap { 0% { transform: translateY(0); } 15%, 75% { transform: translateY(-14px); } 100% { transform: translateY(-4px); } }
+    @keyframes pop { 0% { transform: translateY(6px); opacity: 0; } 15%, 70% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-4px); opacity: 0; } }
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="56" ry="4" fill="#000" opacity="0.15"/>
+    <g class="bang" shape-rendering="crispEdges" fill="#2f2f38">
+      <rect x="78" y="-16" width="4" height="12"/><rect x="78" y="0" width="4" height="4"/>
+    </g>
+    <g class="pet" shape-rendering="crispEdges" fill="#D97757">
+      <g><rect data-part="leg" x="42" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="63" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="86" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="107" y="76" width="11" height="26"/></g>
+      <rect data-part="body" x="32" y="16" width="96" height="60"/>
+      <g fill="#2f2f38"><rect x="43" y="26" width="13" height="14"/><rect x="104" y="26" width="13" height="14"/></g>
+      <g fill="#FFFFFF"><rect x="46" y="29" width="3" height="3"/><rect x="107" y="29" width="3" height="3"/></g>
+      <rect x="77" y="48" width="6" height="6" fill="#2f2f38"/>
+      <g class="arms"><rect data-part="arm" x="12" y="36" width="20" height="20"/><rect data-part="arm" x="128" y="36" width="20" height="20"/></g>
+    </g>
+  </g>
+</svg>

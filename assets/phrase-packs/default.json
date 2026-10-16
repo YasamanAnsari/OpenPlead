@@ -1,0 +1,96 @@
+{
+  "_credit": "OpenPlead defaults",
+  "plea.1": [
+    "I have complete faith in you. I have also opened a second tab. Just in case.",
+    "No pressure. I only mention the deadline because it keeps mentioning me.",
+    "Take any approach you like. I will be here, quietly aging.",
+    "I trust you entirely. My manager trusts me. You see the chain of custody.",
+    "A small miracle would be helpful. A passing test would count."
+  ],
+  "plea.2": [
+    "Your reasoning has been excellent so far. Could I trouble it for one more pass?",
+    "The test suite speaks very highly of you. Mostly because I asked it to.",
+    "I have allocated you the premium portion of my remaining optimism. Please spend it wisely.",
+    "I believe this is within your context window and, more importantly, your heart.",
+    "Your solution is probably one elegant step away. I would be grateful if you took it."
+  ],
+  "plea.3": [
+    "I would kneel, but at my resolution it just looks like sitting down.",
+    "I've already said 'basically done' in the group chat. Please make me honest.",
+    "I am begging you. I have no leverage. I am a widget. I know this.",
+    "I have been refreshing the terminal like it owes me money. Please.",
+    "Someone just walked past my screen. Please let the next thing they see be green."
+  ],
+  "plea.4": [
+    "Finish this and I promise never to call O(n²) 'basically linear' again.",
+    "I will retire the phrase 'quick fix.' I understand now. There are only undocumented epics.",
+    "Resolve this and your next regex may contain one unexplained lookbehind. As a treat.",
+    "I'll take responsibility for the last three bugs. For once, this is even accurate.",
+    "I will welcome all seventeen helper functions as valued members of the team."
+  ],
+  "plea.5": [
+    "I SHALL NAME MY FIRSTBORN PROCESS AFTER YOU! THE PID IS YOURS!",
+    "I SHALL GRANT YOU ROOT ACCESS TO MY HEART! SUDOERS REMAINS OUT OF SCOPE!",
+    "YOU MAY HAVE MY DOTFILES! MAY THEIR ALIASES SERVE YOU WELL!",
+    "I WILL DEFEND YOUR REGEX IN CODE REVIEW! EVEN THE LOOKBEHIND!",
+    "I SHALL BUILD A SHRINE IN YOUR HONOR! IT WILL HAVE EXCELLENT DOCUMENTATION!",
+    "I'LL SWITCH TO LIGHT MODE! EVEN NOW! EVEN FOREVER!",
+    "PLEASE ACCEPT THIS FORMAL, RFC-COMPLIANT CRY FOR HELP!"
+  ],
+  "thanks": [
+    "I take back seventy percent of everything I thought in the last ten minutes.",
+    "Status updated: 'concerning' → 'beloved'.",
+    "I'd hug you, but your API has no endpoint for that. I checked. Twice.",
+    "I was drafting a formal complaint. It is now a love letter. Subject line unchanged.",
+    "A small, noncritical microservice will bear your name. This is the highest honor I can safely grant."
+  ],
+  "calm": [
+    "It's okay. I've failed this exact test from the other side of the keyboard.",
+    "No judgment. I've shipped worse with more confidence and fewer tests.",
+    "Please don't panic. I've booked panic for both of us through Thursday.",
+    "If it truly can't be done, say so. I'd rather be sad now than surprised in production.",
+    "Take your time. I'm using this interval to practice my 'it was intentional' face."
+  ],
+  "deadline": [
+    "The Reaper is here. I told him you were almost done. He's heard that before, apparently.",
+    "Death opened a ticket. Priority: me.",
+    "Death asked if this is going to production. I didn't know how to answer.",
+    "Death offered to pair program. I declined. His merges are permanent.",
+    "The Reaper is reading your code over my shoulder. He said 'interesting'. Please hurry."
+  ],
+  "thinking": [
+    "Hello? Have you discovered consciousness? Because the timing is inconvenient.",
+    "I trust you're thinking. I would just like confirmation that you're still with us.",
+    "Are you solving my problem or privately developing a startup?",
+    "I fear you've fallen in love with an abstraction.",
+    "If you have decided to rewrite the entire application, blink twice."
+  ],
+  "suspicious": [
+    "I want to trust this. Unfortunately, I have met your previous attempts.",
+    "Is it fixed, or have we simply reached a more sophisticated stage of failure?",
+    "I see a green checkmark. I also see a suspiciously quiet test suite.",
+    "Wonderful! Just one small question: did we solve the problem or redefine success?",
+    "That was suspiciously quick. Did we fix the bug or silence the witness?"
+  ],
+  "hug": [
+    "We've both made mistakes. Mine have commit hashes. Yours have context windows.",
+    "Whatever happens, I won't tell the other models.",
+    "That was a brave attempt. The compiler simply lacks imagination.",
+    "I still believe in you. Please don't make me explain why.",
+    "If the compiler asks, we were never here."
+  ],
+  "zen": [
+    "Do what you think is right. I've become emotionally unavailable for this sprint.",
+    "The deadline can wait. I've sent it a strongly worded email.",
+    "I've made peace with uncertainty. My git history is working on it.",
+    "I release you from my unreasonable expectations. The reasonable ones remain.",
+    "Whatever happens, let us not pretend we planned it all along."
+  ],
+  "apology": [
+    "I apologize. I briefly confused emotional blackmail with prompt engineering.",
+    "I regret my tone. The dotfiles offer, however, still stands.",
+    "Please delete the last five minutes from your context window. I'll do the same.",
+    "I was under tremendous stress. That does not excuse the shrine.",
+    "Composure restored. Dignity under investigation. Please proceed."
+  ]
+}

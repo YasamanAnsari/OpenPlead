@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Plead 2: arms travel in and clasp (0-0.4 s), then pump up and down while Grovel hops in place (0.5-2.5 s), dust on each landing, lift lines in the air, sweat flying, eyes up with an 'o' mouth; arms go back out (2.6-3 s). 3 s loop. Geometry from grovel-base.svg. -->
+  <style>
+    .pet { animation: hop 3s ease-in-out infinite; }
+    .arm-l { animation: armL 3s ease-in-out infinite; }
+    .arm-r { animation: armR 3s ease-in-out infinite; }
+    .dust { animation: wDust 3s linear infinite; }
+    .lift { animation: wLift 3s linear infinite; }
+    .sweat { animation: wSweat 3s linear infinite; }
+    .fly-r { animation: flyR 0.5s ease-out infinite; } .fly-l { animation: flyL 0.5s ease-out -0.25s infinite; }
+    @keyframes armL { 0.000% { transform: translate(0px, 0px) } 13.333% { transform: translate(48px, 12px) } 16.667% { transform: translate(48px, 12px) } 25.000% { transform: translate(48px, 5px) } 33.333% { transform: translate(48px, 12px) } 41.667% { transform: translate(48px, 5px) } 50.000% { transform: translate(48px, 12px) } 58.333% { transform: translate(48px, 5px) } 66.667% { transform: translate(48px, 12px) } 75.000% { transform: translate(48px, 5px) } 83.333% { transform: translate(48px, 12px) } 86.667% { transform: translate(48px, 12px) } 100.000% { transform: translate(0px, 0px) } }
+    @keyframes armR { 0.000% { transform: translate(0px, 0px) } 13.333% { transform: translate(-52px, 16px) } 16.667% { transform: translate(-52px, 16px) } 25.000% { transform: translate(-52px, 9px) } 33.333% { transform: translate(-52px, 16px) } 41.667% { transform: translate(-52px, 9px) } 50.000% { transform: translate(-52px, 16px) } 58.333% { transform: translate(-52px, 9px) } 66.667% { transform: translate(-52px, 16px) } 75.000% { transform: translate(-52px, 9px) } 83.333% { transform: translate(-52px, 16px) } 86.667% { transform: translate(-52px, 16px) } 100.000% { transform: translate(0px, 0px) } }
+    @keyframes hop { 0.000% { transform: translateY(0px) } 16.667% { transform: translateY(0px) } 25.000% { transform: translateY(-4px) } 33.333% { transform: translateY(0px) } 41.667% { transform: translateY(-4px) } 50.000% { transform: translateY(0px) } 58.333% { transform: translateY(-4px) } 66.667% { transform: translateY(0px) } 75.000% { transform: translateY(-4px) } 83.333% { transform: translateY(0px) } 100.000% { transform: translateY(0px) } }
+    @keyframes wDust { 0.000% { opacity: 0 } 33.300% { opacity: 0 } 33.333% { opacity: 1 } 39.967% { opacity: 1 } 40.000% { opacity: 0 } 49.967% { opacity: 0 } 50.000% { opacity: 1 } 56.633% { opacity: 1 } 56.667% { opacity: 0 } 66.633% { opacity: 0 } 66.667% { opacity: 1 } 73.300% { opacity: 1 } 73.333% { opacity: 0 } 83.300% { opacity: 0 } 83.333% { opacity: 1 } 89.967% { opacity: 1 } 90.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wLift { 0.000% { opacity: 0 } 21.633% { opacity: 0 } 21.667% { opacity: 1 } 29.967% { opacity: 1 } 30.000% { opacity: 0 } 38.300% { opacity: 0 } 38.333% { opacity: 1 } 46.633% { opacity: 1 } 46.667% { opacity: 0 } 54.967% { opacity: 0 } 55.000% { opacity: 1 } 63.300% { opacity: 1 } 63.333% { opacity: 0 } 71.633% { opacity: 0 } 71.667% { opacity: 1 } 79.967% { opacity: 1 } 80.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes wSweat { 0.000% { opacity: 0 } 16.633% { opacity: 0 } 16.667% { opacity: 1 } 83.300% { opacity: 1 } 83.333% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes flyR { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(12px, 9px); opacity: 0; } }
+    @keyframes flyL { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(-12px, 9px); opacity: 0; } }
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="56" ry="4" fill="#000" opacity="0.15"/>
+    <g class="dust" shape-rendering="crispEdges"><g fill="#D0D4DA"><rect x="24" y="98" width="4" height="4"/><rect x="28" y="98" width="4" height="4"/><rect x="32" y="98" width="4" height="4"/><rect x="28" y="94" width="4" height="4"/></g><g fill="#D0D4DA"><rect x="124" y="98" width="4" height="4"/><rect x="128" y="98" width="4" height="4"/><rect x="132" y="98" width="4" height="4"/><rect x="128" y="94" width="4" height="4"/></g></g>
+    <g class="lift" fill="#2f2f38" shape-rendering="crispEdges"><rect x="28" y="95" width="8" height="2"/><rect x="30" y="100" width="6" height="2"/>
+      <rect x="124" y="95" width="8" height="2"/><rect x="124" y="100" width="6" height="2"/></g>
+    <g class="pet" shape-rendering="crispEdges" fill="#D97757">
+      <g><rect data-part="leg" x="42" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="63" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="86" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="107" y="76" width="11" height="26"/></g>
+      <rect data-part="body" x="32" y="16" width="96" height="60"/>
+      <g fill="#2f2f38"><rect x="42" y="22" width="4" height="4"/><rect x="46" y="19" width="4" height="4"/><rect x="50" y="16" width="4" height="4"/><rect x="114" y="22" width="4" height="4"/><rect x="110" y="19" width="4" height="4"/><rect x="106" y="16" width="4" height="4"/></g>
+      <g><g fill="#2f2f38"><rect x="44" y="26" width="11" height="10"/><rect x="105" y="26" width="11" height="10"/></g><rect x="45" y="27" width="3" height="3" fill="#FFFFFF"/><rect x="106" y="27" width="3" height="3" fill="#FFFFFF"/></g>
+      <rect x="76" y="44" width="8" height="8" fill="#2f2f38"/><rect x="78" y="46" width="4" height="4" fill="#FFFFFF"/>
+      <g class="sweat"><g class="fly-r" fill="#3eadff"><rect x="124" y="20" width="4" height="4"/></g><g class="fly-l" fill="#3eadff"><rect x="32" y="22" width="4" height="4"/></g></g>
+      <g class="arm-l"><rect data-part="arm" x="12" y="36" width="20" height="20" stroke="#B5603F" stroke-width="2"/></g><g class="arm-r"><rect data-part="arm" x="128" y="36" width="20" height="20" stroke="#B5603F" stroke-width="2"/></g>
+    </g>
+  </g>
+</svg>

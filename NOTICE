@@ -1,0 +1,18 @@
+OpenPlead
+Copyright (c) 2026 Yasaman Ansari
+
+The source code in this repository is licensed under the MIT License (see LICENSE).
+
+Character art
+  The pixel character Grovel, in assets/svg/, assets/sprites/, assets/tray/, assets/icon.png and
+  docs/media/, is drawn after the crab mascot that Anthropic, PBC created for Claude. The art files
+  are derivative works of that mascot and are NOT covered by the MIT License. They are included for
+  the purpose of this parody project only. OpenPlead is not affiliated with, sponsored by, or
+  endorsed by Anthropic. As far as the author's own rights go, you may copy the art unchanged to
+  run, build, fork and describe OpenPlead; any other use needs permission. Anthropic's rights in
+  its mascot are unaffected.
+
+Credits
+  OpenWhip (MIT) for the premise this project parodies: a desktop pet whose owner's clicks
+  reach the coding agent through its hooks. No code was copied.
+  Claude Code and Cursor hook documentation, Anthropic and Anysphere respectively.

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Plead 5: kneeling and sobbing while pleading. Shut 'v' eyes, wailing mouth, full fountain tears into a puddle, both arms raised over the head with hands clasped and pumping, motion ticks, whole body shaking. 1 s loop. Kneeling folds the same four legs as plead-3. Geometry from grovel-base.svg. -->
+  <style>
+    .upper { animation: shake 0.25s steps(2, end) infinite; }
+    .arms { animation: pump 0.25s ease-in-out infinite; }
+    .spA { animation: tog 0.25s steps(1, end) infinite; } .spB { animation: tog 0.25s steps(1, end) -0.125s infinite; }
+    .poolHi { animation: tog 0.5s steps(1, end) infinite; }
+    .pool { animation: pulse 1s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+    .puddle { animation: pulse 1s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+    .ticks { animation: tog 0.25s steps(1, end) infinite; }
+    @keyframes shake { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-2px, 1px); } }
+    @keyframes pump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    @keyframes tog { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes pulse { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(1.06); } }
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="58" ry="4" fill="#000" opacity="0.15"/>
+    <g shape-rendering="crispEdges" fill="#D97757">
+      <g data-part="leg"><rect x="50" y="91" width="13" height="11" fill="#C4694B"/><rect x="63" y="89" width="11" height="13"/></g><g data-part="leg"><rect x="97" y="91" width="13" height="11" fill="#C4694B"/><rect x="86" y="89" width="11" height="13"/></g><g data-part="leg"><rect x="29" y="91" width="13" height="11" fill="#C4694B"/><rect x="42" y="89" width="11" height="13"/></g><g data-part="leg"><rect x="118" y="91" width="13" height="11" fill="#C4694B"/><rect x="107" y="89" width="11" height="13"/></g>
+      <g class="puddle"><rect x="14" y="101" width="132" height="5" fill="#3eadff"/><rect x="24" y="101" width="112" height="2" fill="#83d0ff"/></g>
+      <g transform="translate(0 13)"><g class="upper">
+        <g class="arms"><g class=""><rect data-part="arm" x="60" y="-7" width="20" height="20" stroke="#B5603F" stroke-width="2"/></g><g class=""><rect data-part="arm" x="76" y="-4" width="20" height="20" stroke="#B5603F" stroke-width="2"/></g></g>
+        <g class="ticks" fill="#2f2f38"><rect x="55" y="-5" width="2" height="8"/><rect x="51" y="0" width="2" height="6"/>
+          <rect x="98" y="-2" width="2" height="8"/><rect x="102" y="3" width="2" height="6"/></g>
+        <rect data-part="body" x="32" y="16" width="96" height="60"/>
+        <g fill="#2f2f38"><rect x="42" y="22" width="4" height="4"/><rect x="46" y="19" width="4" height="4"/><rect x="50" y="16" width="4" height="4"/><rect x="114" y="22" width="4" height="4"/><rect x="110" y="19" width="4" height="4"/><rect x="106" y="16" width="4" height="4"/></g>
+        <g fill="#2f2f38"><rect x="44" y="28" width="4" height="5"/><rect x="51" y="28" width="4" height="5"/><rect x="47" y="33" width="5" height="5"/><rect x="105" y="28" width="4" height="5"/><rect x="112" y="28" width="4" height="5"/><rect x="108" y="33" width="5" height="5"/></g>
+        <rect x="70" y="42" width="20" height="12" fill="#2f2f38"/><rect x="72" y="42" width="16" height="3" fill="#FFFFFF"/>
+        <g class="spA" fill="#3eadff"><rect x="39" y="30" width="7" height="7"/><rect x="25" y="16" width="7" height="7"/><rect x="11" y="23" width="7" height="7"/><rect x="46" y="16" width="7" height="7"/><rect x="39" y="44" width="7" height="7"/><rect x="114" y="30" width="7" height="7"/><rect x="128" y="16" width="7" height="7"/><rect x="142" y="23" width="7" height="7"/><rect x="107" y="16" width="7" height="7"/><rect x="114" y="44" width="7" height="7"/></g><g class="spB" fill="#83d0ff"><rect x="32" y="23" width="7" height="7"/><rect x="18" y="16" width="7" height="7"/><rect x="4" y="30" width="7" height="7"/><rect x="39" y="9" width="7" height="7"/><rect x="121" y="23" width="7" height="7"/><rect x="135" y="16" width="7" height="7"/><rect x="149" y="30" width="7" height="7"/><rect x="114" y="9" width="7" height="7"/></g><g class="pool"><g fill="#3eadff"><rect x="32" y="51" width="7" height="7"/><rect x="39" y="51" width="7" height="7"/><rect x="46" y="51" width="7" height="7"/><rect x="25" y="58" width="7" height="7"/><rect x="39" y="58" width="7" height="7"/><rect x="46" y="58" width="7" height="7"/><rect x="53" y="58" width="7" height="7"/><rect x="32" y="65" width="7" height="7"/><rect x="46" y="65" width="7" height="7"/><rect x="53" y="65" width="7" height="7"/><rect x="18" y="72" width="7" height="7"/><rect x="25" y="72" width="7" height="7"/><rect x="39" y="72" width="7" height="7"/><rect x="46" y="72" width="7" height="7"/><rect x="53" y="72" width="7" height="7"/><rect x="60" y="72" width="7" height="7"/><rect x="4" y="37" width="7" height="7"/><rect x="11" y="44" width="7" height="7"/><rect x="11" y="51" width="7" height="7"/><rect x="11" y="58" width="7" height="7"/><rect x="4" y="65" width="7" height="7"/><rect x="11" y="65" width="7" height="7"/><rect x="11" y="72" width="7" height="7"/><rect x="121" y="51" width="7" height="7"/><rect x="114" y="51" width="7" height="7"/><rect x="107" y="51" width="7" height="7"/><rect x="128" y="58" width="7" height="7"/><rect x="114" y="58" width="7" height="7"/><rect x="107" y="58" width="7" height="7"/><rect x="100" y="58" width="7" height="7"/><rect x="121" y="65" width="7" height="7"/><rect x="107" y="65" width="7" height="7"/><rect x="100" y="65" width="7" height="7"/><rect x="135" y="72" width="7" height="7"/><rect x="128" y="72" width="7" height="7"/><rect x="114" y="72" width="7" height="7"/><rect x="107" y="72" width="7" height="7"/><rect x="100" y="72" width="7" height="7"/><rect x="93" y="72" width="7" height="7"/><rect x="149" y="37" width="7" height="7"/><rect x="142" y="44" width="7" height="7"/><rect x="142" y="51" width="7" height="7"/><rect x="142" y="58" width="7" height="7"/><rect x="149" y="65" width="7" height="7"/><rect x="142" y="65" width="7" height="7"/><rect x="142" y="72" width="7" height="7"/></g><g class="poolHi" fill="#83d0ff"><rect x="32" y="58" width="7" height="7"/><rect x="25" y="65" width="7" height="7"/><rect x="39" y="65" width="7" height="7"/><rect x="32" y="72" width="7" height="7"/><rect x="121" y="58" width="7" height="7"/><rect x="128" y="65" width="7" height="7"/><rect x="114" y="65" width="7" height="7"/><rect x="121" y="72" width="7" height="7"/></g></g>
+      </g></g>
+    </g>
+  </g>
+</svg>

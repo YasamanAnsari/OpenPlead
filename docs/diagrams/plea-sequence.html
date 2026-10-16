@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One plea, from click to agent</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f6f4ef;
+      --color-ink:     #2f2f38;
+      --color-muted:   #5b5b66;
+      --color-accent:  #d97757;
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+    svg { width: 100%; min-width: 960px; display: block; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Sequence · OpenPlead</p>
+    <h1>One plea, from click to agent</h1>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="plea-sequence-title plea-sequence-desc">
+        <title id="plea-sequence-title">One plea, from click to agent</title>
+        <desc id="plea-sequence-desc">You click Grovel, the line is queued, and at the agent's next hook it is handed over: as additional context after a tool call, or as a block reason if the turn is ending. When the turn ends Grovel bows and queues a thank-you for your next prompt.</desc>
+        <defs>
+          <marker id="seq-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5b5b66"/></marker>
+          <marker id="seq-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+          <marker id="seq-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#d97757"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f6f4ef"/>
+
+        <!-- Lifelines -->
+        <line x1="160" y1="120" x2="160" y2="576" stroke="rgba(47,47,56,0.22)" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <line x1="480" y1="120" x2="480" y2="576" stroke="rgba(47,47,56,0.22)" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <line x1="800" y1="120" x2="800" y2="576" stroke="rgba(47,47,56,0.22)" stroke-width="0.8" stroke-dasharray="3,3"/>
+
+        <!-- Participants -->
+        <rect x="88" y="72" width="144" height="48" rx="6" fill="rgba(47,47,56,0.03)" stroke="rgba(47,47,56,0.30)" stroke-width="1"/>
+        <text x="160" y="92" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">You</text>
+        <text x="160" y="106" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">at the keyboard</text>
+
+        <rect x="408" y="72" width="144" height="48" rx="6" fill="#ffffff" stroke="#2f2f38" stroke-width="1"/>
+        <text x="480" y="92" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Grovel</text>
+        <text x="480" y="106" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">OpenPlead, on your desk</text>
+
+        <rect x="728" y="72" width="144" height="48" rx="6" fill="rgba(47,47,56,0.03)" stroke="rgba(47,47,56,0.30)" stroke-width="1"/>
+        <text x="800" y="92" fill="#2f2f38" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Claude Code</text>
+        <text x="800" y="106" fill="#5b5b66" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">or Cursor</text>
+
+        <!-- alt fragment -->
+        <rect x="440" y="236" width="432" height="248" rx="4" fill="transparent" stroke="rgba(47,47,56,0.30)" stroke-width="1"/>
+        <rect x="440" y="236" width="36" height="14" fill="rgba(47,47,56,0.06)" stroke="rgba(47,47,56,0.30)" stroke-width="0.8"/>
+        <text x="458" y="246" fill="rgba(47,47,56,0.70)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ALT</text>
+        <text x="488" y="262" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.02em">[a tool call follows]</text>
+        <line x1="440" y1="356" x2="872" y2="356" stroke="rgba(47,47,56,0.30)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <text x="488" y="378" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.02em">[the turn is ending]</text>
+
+        <!-- Activations -->
+        <rect x="476" y="156" width="8" height="48" fill="rgba(47,47,56,0.06)" stroke="rgba(47,47,56,0.30)" stroke-width="0.8"/>
+        <rect x="476" y="284" width="8" height="48" fill="rgba(47,47,56,0.06)" stroke="rgba(47,47,56,0.30)" stroke-width="0.8"/>
+        <rect x="476" y="400" width="8" height="48" fill="rgba(47,47,56,0.06)" stroke="rgba(47,47,56,0.30)" stroke-width="0.8"/>
+        <rect x="476" y="516" width="8" height="40" fill="rgba(47,47,56,0.06)" stroke="rgba(47,47,56,0.30)" stroke-width="0.8"/>
+
+        <!-- 1. click -->
+        <line x1="160" y1="164" x2="476" y2="164" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#seq-arrow)"/>
+        <rect x="280" y="144" width="76" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="318" y="153" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">CLICK, LEVEL 3</text>
+
+        <!-- 2. self: queue -->
+        <path d="M484,180 H516 Q524,180 524,188 V196 Q524,204 516,204 H484" fill="none" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#seq-arrow)"/>
+        <rect x="532" y="186" width="124" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="594" y="195" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">QUEUE LINE, SHOW NAMEPLATE</text>
+
+        <!-- 3. PostToolUse -->
+        <line x1="800" y1="292" x2="484" y2="292" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#seq-arrow-link)"/>
+        <rect x="608" y="272" width="68" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="642" y="281" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">POSTTOOLUSE</text>
+
+        <!-- 4. your line, as additional context (headline) -->
+        <line x1="484" y1="324" x2="800" y2="324" stroke="#d97757" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#seq-arrow-accent)"/>
+        <rect x="580" y="304" width="124" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="642" y="313" fill="#d97757" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">YOUR LINE AS CONTEXT</text>
+
+        <!-- 5. Stop -->
+        <line x1="800" y1="408" x2="484" y2="408" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#seq-arrow-link)"/>
+        <rect x="626" y="388" width="32" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="642" y="397" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">STOP</text>
+
+        <!-- 6. block with reason -->
+        <line x1="484" y1="440" x2="800" y2="440" stroke="#5b5b66" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#seq-arrow)"/>
+        <rect x="574" y="420" width="136" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="642" y="429" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">BLOCK, REASON: YOUR LINE</text>
+
+        <!-- 7. turn ends -->
+        <line x1="800" y1="524" x2="484" y2="524" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#seq-arrow-link)"/>
+        <rect x="582" y="504" width="120" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="642" y="513" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">STOP, NOTHING QUEUED</text>
+
+        <!-- 8. bow -->
+        <line x1="476" y1="548" x2="160" y2="548" stroke="#5b5b66" stroke-width="1.2" marker-end="url(#seq-arrow)"/>
+        <rect x="256" y="556" width="124" height="12" rx="2" fill="#f6f4ef"/>
+        <text x="318" y="565" fill="#8a8a93" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">BOW, THANKS NEXT PROMPT</text>
+
+        <!-- Legend -->
+        <line x1="40" y1="600" x2="920" y2="600" stroke="rgba(47,47,56,0.10)" stroke-width="0.8"/>
+        <text x="40" y="620" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text>
+        <line x1="120" y1="617" x2="148" y2="617" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#seq-arrow-link)"/>
+        <text x="156" y="620" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">HOOK CALL FROM THE AGENT</text>
+        <line x1="344" y1="617" x2="372" y2="617" stroke="#5b5b66" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#seq-arrow)"/>
+        <text x="380" y="620" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">HOOK REPLY</text>
+        <line x1="488" y1="617" x2="516" y2="617" stroke="#d97757" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#seq-arrow-accent)"/>
+        <text x="524" y="620" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">THE USUAL PATH FOR YOUR LINE</text>
+        <rect x="752" y="611" width="20" height="12" rx="2" fill="rgba(47,47,56,0.06)" stroke="rgba(47,47,56,0.30)" stroke-width="0.8"/>
+        <text x="780" y="620" fill="#5b5b66" font-size="8" font-family="'Geist Mono', monospace">GROVEL IS BUSY</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

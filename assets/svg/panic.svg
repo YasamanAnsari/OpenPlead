@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Panic: red '!!' popping overhead, wide ring eyes with darting pupils and raised brows, 'o' mouth, both arms flung up above the head and flailing with motion ticks, running in place with dust at the feet, sweat flying, body shaking. 1 s loop. Geometry from grovel-base.svg. -->
+  <style>
+    .pet { animation: shake 0.25s steps(2, end) infinite; }
+    .arm-l { animation: flail 0.25s ease-in-out infinite; } .arm-r { animation: flail 0.25s ease-in-out -0.125s infinite; }
+    .leg-a { animation: run 0.25s steps(1, end) infinite; } .leg-b { animation: run 0.25s steps(1, end) -0.125s infinite; }
+    .pupils { animation: jitter 0.25s steps(1, end) infinite; }
+    .bang-pop { animation: pop 0.5s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+    .drop-l { animation: flyL 0.5s ease-out infinite; } .drop-r { animation: flyR 0.5s ease-out -0.25s infinite; }
+    .ticks, .dust-a { animation: blink 0.25s steps(1, end) infinite; } .dust-b { animation: blink 0.25s steps(1, end) -0.125s infinite; }
+    @keyframes shake { 0%, 100% { transform: translateX(-2px); } 50% { transform: translateX(2px); } }
+    @keyframes flail { 0%, 100% { transform: translateY(-36px); } 50% { transform: translateY(-44px); } }
+    @keyframes run { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes jitter { 0% { transform: translate(-2px, 0); } 50% { transform: translate(2px, 1px); } }
+    @keyframes pop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    @keyframes flyL { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(-12px, 9px); opacity: 0; } }
+    @keyframes flyR { 0% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(12px, 9px); opacity: 0; } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="56" ry="4" fill="#000" opacity="0.15"/>
+    <g class="bang-pop" shape-rendering="crispEdges"><g transform="translate(0 -20)"><g fill="#f4552a"><rect x="68" y="0" width="4" height="4"/><rect x="68" y="4" width="4" height="4"/><rect x="68" y="8" width="4" height="4"/><rect x="68" y="14" width="4" height="4"/><rect x="78" y="0" width="4" height="4"/><rect x="78" y="4" width="4" height="4"/><rect x="78" y="8" width="4" height="4"/><rect x="78" y="14" width="4" height="4"/></g></g></g>
+    <g shape-rendering="crispEdges"><g class="dust-a"><g fill="#D0D4DA"><rect x="22" y="98" width="4" height="4"/><rect x="26" y="98" width="4" height="4"/><rect x="30" y="98" width="4" height="4"/><rect x="26" y="94" width="4" height="4"/></g><g fill="#D0D4DA"><rect x="104" y="99" width="4" height="4"/><rect x="108" y="99" width="4" height="4"/><rect x="112" y="99" width="4" height="4"/><rect x="108" y="95" width="4" height="4"/></g></g><g class="dust-b"><g fill="#D0D4DA"><rect x="46" y="99" width="4" height="4"/><rect x="50" y="99" width="4" height="4"/><rect x="54" y="99" width="4" height="4"/><rect x="50" y="95" width="4" height="4"/></g><g fill="#D0D4DA"><rect x="126" y="98" width="4" height="4"/><rect x="130" y="98" width="4" height="4"/><rect x="134" y="98" width="4" height="4"/><rect x="130" y="94" width="4" height="4"/></g></g></g>
+    <g class="pet" shape-rendering="crispEdges" fill="#D97757">
+      <g class="leg-a"><rect data-part="leg" x="42" y="76" width="11" height="26"/></g><g class="leg-b"><rect data-part="leg" x="63" y="76" width="11" height="26"/></g><g class="leg-a"><rect data-part="leg" x="86" y="76" width="11" height="26"/></g><g class="leg-b"><rect data-part="leg" x="107" y="76" width="11" height="26"/></g>
+      <rect data-part="body" x="32" y="16" width="96" height="60"/>
+      <g fill="#2f2f38"><rect x="43" y="20" width="4" height="4"/><rect x="48" y="18" width="4" height="4"/><rect x="109" y="18" width="4" height="4"/><rect x="114" y="20" width="4" height="4"/></g>
+      <g><g fill="#2f2f38"><rect x="43" y="27" width="13" height="12"/><rect x="104" y="27" width="13" height="12"/></g><g fill="#FFFFFF"><rect x="46" y="30" width="7" height="6"/><rect x="107" y="30" width="7" height="6"/></g><g class="pupils" fill="#2f2f38"><rect x="48" y="31" width="3" height="4"/><rect x="109" y="31" width="3" height="4"/></g></g>
+      <rect x="76" y="44" width="8" height="8" fill="#2f2f38"/><rect x="78" y="46" width="4" height="4" fill="#FFFFFF"/>
+      <g class="drop-l" fill="#3eadff"><rect x="28" y="20" width="4" height="4"/></g><g class="drop-r" fill="#3eadff"><rect x="128" y="20" width="4" height="4"/></g>
+      <g class="arm-l"><rect data-part="arm" x="12" y="36" width="20" height="20"/></g><g class="arm-r"><rect data-part="arm" x="128" y="36" width="20" height="20"/></g>
+      <g class="ticks" fill="#2f2f38"><rect x="7" y="-4" width="2" height="7"/><rect x="3" y="4" width="2" height="6"/>
+        <rect x="151" y="-4" width="2" height="7"/><rect x="155" y="4" width="2" height="6"/></g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="130" viewBox="0 0 160 130">
+  <!-- Working: typing on the laptop with a coffee beside it. 2 s loop: type (0-1.2 s), pause to think with eyes up and a '...' bubble (1.2-1.7 s), type again. Code bits float off the keyboard. Geometry from grovel-base.svg. -->
+  <style>
+    .pet { animation: bob 1s ease-in-out infinite; }
+    .arm-l { animation: armL 2s ease-in-out infinite; }
+    .arm-r { animation: armR 2s ease-in-out infinite; }
+    .eyes-work, .bits { animation: wWork 2s linear infinite; }
+    .scan { animation: scan 1s steps(4, end) infinite; }
+    .eyes-think, .bubble { animation: wThink 2s linear infinite; }
+    .bit { animation: float 1s linear infinite; } .b2 { animation-delay: -0.5s; }
+    .steam { animation: steam 1s linear infinite; } .s2 { animation-delay: -0.33s; } .s3 { animation-delay: -0.66s; }
+    .dot { animation: blink 0.5s steps(1, end) infinite; } .d2 { animation-delay: -0.17s; } .d3 { animation-delay: -0.33s; }
+    @keyframes armL { 0.000% { transform: translateY(0px) } 6.250% { transform: translateY(3px) } 12.500% { transform: translateY(0px) } 18.750% { transform: translateY(3px) } 25.000% { transform: translateY(0px) } 31.250% { transform: translateY(3px) } 37.500% { transform: translateY(0px) } 43.750% { transform: translateY(3px) } 50.000% { transform: translateY(0px) } 56.250% { transform: translateY(3px) } 62.500% { transform: translateY(0px) } 87.500% { transform: translateY(0px) } 93.750% { transform: translateY(3px) } 100.000% { transform: translateY(0px) } }
+    @keyframes armR { 0.000% { transform: translateY(3px) } 6.250% { transform: translateY(0px) } 12.500% { transform: translateY(3px) } 18.750% { transform: translateY(0px) } 25.000% { transform: translateY(3px) } 31.250% { transform: translateY(0px) } 37.500% { transform: translateY(3px) } 43.750% { transform: translateY(0px) } 50.000% { transform: translateY(3px) } 56.250% { transform: translateY(0px) } 62.500% { transform: translateY(3px) } 67.500% { transform: translateY(0px) } 87.500% { transform: translateY(0px) } 100.000% { transform: translateY(3px) } }
+    @keyframes wWork { 0.000% { opacity: 1 } 59.950% { opacity: 1 } 60.000% { opacity: 0 } 84.950% { opacity: 0 } 85.000% { opacity: 1 } 99.950% { opacity: 1 } 100.000% { opacity: 1 } }
+    @keyframes wThink { 0.000% { opacity: 0 } 59.950% { opacity: 0 } 60.000% { opacity: 1 } 84.950% { opacity: 1 } 85.000% { opacity: 0 } 100.000% { opacity: 0 } }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1px); } }
+    @keyframes scan { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+    @keyframes float { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-16px); opacity: 0; } }
+    @keyframes steam { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-10px); opacity: 0; } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  </style>
+  <g transform="translate(0 20)">
+    <ellipse cx="80" cy="104" rx="56" ry="4" fill="#000" opacity="0.15"/>
+    <g shape-rendering="crispEdges"><rect x="8" y="88" width="4" height="8" fill="#FFFFFF"/><rect x="12" y="84" width="16" height="16" fill="#FFFFFF"/><rect x="15" y="89" width="7" height="6" fill="#D97757"/><g fill="#D0D4DA"><rect class="steam" x="14" y="78" width="3" height="3"/><rect class="steam s2" x="19" y="76" width="3" height="3"/><rect class="steam s3" x="24" y="78" width="3" height="3"/></g></g>
+    <g class="pet" shape-rendering="crispEdges" fill="#D97757">
+      <g><rect data-part="leg" x="42" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="63" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="86" y="76" width="11" height="26"/></g><g><rect data-part="leg" x="107" y="76" width="11" height="26"/></g>
+      <rect data-part="body" x="32" y="16" width="96" height="60"/>
+      <g class="eyes-work"><g class="scan"><g fill="#2f2f38"><rect x="44" y="31" width="11" height="10"/><rect x="105" y="31" width="11" height="10"/></g></g></g>
+      <g class="eyes-think"><g fill="#2f2f38"><rect x="47" y="27" width="11" height="10"/><rect x="108" y="27" width="11" height="10"/></g></g>
+      <g class="arm-l"><rect data-part="arm" x="44" y="62" width="20" height="20"/></g><g class="arm-r"><rect data-part="arm" x="96" y="62" width="20" height="20"/></g>
+      <rect x="56" y="60" width="48" height="32" fill="#8A9099"/><rect x="56" y="60" width="48" height="4" fill="#B0B5BD"/><rect x="76" y="72" width="8" height="8" fill="#FFFFFF"/><rect x="50" y="92" width="60" height="6" fill="#B0B5BD"/>
+      <g class="bits" fill="#3bf497"><rect class="bit" x="66" y="52" width="3" height="3"/><rect class="bit b2" x="90" y="50" width="3" height="3"/>
+        <rect class="bit b2" x="60" y="56" width="2" height="2"/><rect class="bit" x="96" y="55" width="2" height="2"/></g>
+    </g>
+    <g class="bubble" shape-rendering="crispEdges"><g fill="#3bf497"><rect x="116" y="0" width="4" height="4"/><rect x="120" y="0" width="4" height="4"/><rect x="124" y="0" width="4" height="4"/><rect x="128" y="0" width="4" height="4"/><rect x="132" y="0" width="4" height="4"/><rect x="136" y="0" width="4" height="4"/><rect x="140" y="0" width="4" height="4"/><rect x="112" y="4" width="4" height="4"/><rect x="144" y="4" width="4" height="4"/><rect x="112" y="8" width="4" height="4"/><rect x="144" y="8" width="4" height="4"/><rect x="116" y="12" width="4" height="4"/><rect x="120" y="12" width="4" height="4"/><rect x="124" y="12" width="4" height="4"/><rect x="128" y="12" width="4" height="4"/><rect x="132" y="12" width="4" height="4"/><rect x="136" y="12" width="4" height="4"/><rect x="140" y="12" width="4" height="4"/><rect x="116" y="16" width="4" height="4"/></g><rect x="116" y="4" width="28" height="8" fill="#3bf497"/><g fill="#2c8c5e"><rect class="dot" x="119" y="6" width="4" height="4"/><rect class="dot d2" x="128" y="6" width="4" height="4"/><rect class="dot d3" x="137" y="6" width="4" height="4"/></g></g>
+  </g>
+</svg>

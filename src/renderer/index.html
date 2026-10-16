@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src file:"
+    />
+    <style>
+      /* Speech is paper and ink (the comic); the nameplate is a system HUD that follows light and dark mode. */
+      :root {
+        --ink: #2f2f38;
+        --paper: #fffdf8;
+        --grovel: #d97757;
+        --hud-bg: rgba(255, 255, 255, 0.9);
+        --hud-border: rgba(0, 0, 0, 0.12);
+        --hud-text: #242427;
+        --hud-muted: #6b6b70;
+        --hud-shadow: rgba(0, 0, 0, 0.16);
+        --run: #16a34a;
+        --wait: #6b6b70; /* reads on the light plate (3:1 or better, WCAG 1.4.11) */
+        --attn: #d97706;
+        --bad: #dc2626;
+        --ok: #15803d;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --hud-bg: rgba(32, 32, 36, 0.9);
+          --hud-border: rgba(255, 255, 255, 0.12);
+          --hud-text: #f4f4f5;
+          --hud-muted: #a1a1aa;
+          --hud-shadow: rgba(0, 0, 0, 0.34);
+          --wait: #71717a;
+          --bad: #f87171;
+          --ok: #4ade80;
+        }
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: transparent;
+        overflow: hidden;
+        user-select: none;
+        font:
+          13px/1.3 -apple-system,
+          'Segoe UI',
+          system-ui,
+          sans-serif;
+      }
+      #stage {
+        position: absolute;
+        inset: 0;
+      }
+      /* Comic-strip pieces: paper, a hard ink outline and a flat offset shadow, no blur anywhere. */
+      #bubble {
+        position: absolute;
+        left: 50%;
+        bottom: 210px;
+        transform: translateX(-50%);
+        max-width: 244px;
+        width: max-content;
+        padding: 6px 10px;
+        border-radius: 10px;
+        background: var(--paper);
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        box-shadow: 2px 2px 0 var(--ink);
+        text-align: center;
+        opacity: 0;
+        transition:
+          opacity 0.15s,
+          box-shadow 0.3s;
+        pointer-events: none;
+      }
+      #bubble .text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+      #bubble::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -8px;
+        margin-left: -6px;
+        border: 6px solid transparent;
+        border-top-color: var(--ink);
+        border-bottom: 0;
+      }
+      #bubble.show {
+        opacity: 1;
+      }
+      /* Queued words wait in the bubble: the offset shadow turns Grovel-orange until they go out. */
+      #bubble.queued {
+        box-shadow: 2px 2px 0 var(--grovel);
+      }
+      #pet {
+        position: absolute;
+        left: 50%;
+        bottom: 70px;
+        transform: translateX(-50%);
+        height: 130px;
+        image-rendering: pixelated;
+        -webkit-user-drag: none;
+        cursor: pointer;
+      }
+      /* Pupil highlights over the idle sprite's eyes (navy 11x10 at (44,48) and (105,48) in the 160x130 sprite,
+      which is drawn 1:1 at 130 px tall and centred). Hidden in every other mood. */
+      .pupil {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: #f4f4f7;
+        bottom: 70px;
+        display: none;
+        transition: transform 0.12s;
+      }
+      .pupil.show {
+        display: block;
+      }
+      #pupilL {
+        left: calc(50% - 80px + 48px);
+        margin-bottom: 75px;
+      }
+      #pupilR {
+        left: calc(50% - 80px + 109px);
+        margin-bottom: 75px;
+      }
+      /* The nameplate: a HUD row under the pet. Dot + who is doing what, and a chip with the queue status. */
+      #tag {
+        position: absolute;
+        left: 50%;
+        bottom: 8px;
+        transform: translateX(-50%);
+        max-width: 264px;
+        display: none;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 4px 8px;
+        padding: 5px 9px 5px 8px;
+        border-radius: 8px;
+        background: var(--hud-bg);
+        color: var(--hud-text);
+        border: 1px solid var(--hud-border);
+        box-shadow:
+          0 8px 18px -12px var(--hud-shadow),
+          0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 11px;
+        line-height: 1.3;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      #tag.show {
+        display: flex;
+      }
+      #tag .l1 {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+      }
+      #tag .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--wait);
+        flex: none;
+      }
+      #tag.working .dot {
+        background: var(--run);
+        animation: pulse 1.6s ease-in-out infinite;
+      }
+      #tag.attention .dot {
+        background: var(--attn);
+        animation: pulse 0.9s ease-in-out infinite;
+      }
+      #tag.panic .dot {
+        background: var(--bad);
+        animation: pulse 0.8s ease-in-out infinite; /* urgent, but a pulse, not a flash */
+      }
+      #tag .l2 {
+        display: none;
+        padding: 1px 7px;
+        border-radius: 999px;
+        border: 1px solid var(--hud-border);
+        color: var(--hud-muted);
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+      }
+      #tag.has2 .l2 {
+        display: inline-block;
+      }
+      /* A queued chip: Grovel-orange border, settling in once (a brief entrance; no constant motion while it waits). */
+      #tag.queued .l2 {
+        border-color: var(--grovel);
+        animation: settle 0.3s ease-out;
+      }
+      #tag .ladder i {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        margin-left: 2px;
+        background: var(--hud-muted); /* an unlit step still reads against the plate (3:1 or better) */
+        opacity: 0.8;
+        vertical-align: middle;
+      }
+      #tag .ladder i.on {
+        background: var(--grovel);
+        opacity: 1;
+      }
+      #tag.sent .l2 {
+        color: var(--ok);
+        border-color: currentColor;
+      }
+      #tag.dropped .l2 {
+        color: var(--bad);
+        border-color: currentColor;
+      }
+      @keyframes pulse {
+        50% {
+          opacity: 0.35;
+        }
+      }
+      @keyframes settle {
+        from {
+          transform: scale(0.94);
+          opacity: 0.5;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #tag .dot,
+        #tag.queued .l2 {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage">
+      <div id="bubble"><span class="text"></span></div>
+      <img id="pet" alt="" draggable="false" />
+      <div class="pupil" id="pupilL"></div>
+      <div class="pupil" id="pupilR"></div>
+      <div id="tag">
+        <div class="l1"><span class="dot"></span><span class="t1"></span></div>
+        <div class="l2"></div>
+      </div>
+    </div>
+    <script src="pet.js"></script>
+  </body>
+</html>

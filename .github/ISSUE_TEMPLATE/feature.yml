@@ -1,0 +1,11 @@
+name: Idea
+description: Something the pet should say, do, or stop doing
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea, and the moment it would help
+      description: Pleas, thanks and calm lines only ever go to the agent through hook responses; the pet never decides for you. Ideas that keep to that land easily.
+    validations:
+      required: true
